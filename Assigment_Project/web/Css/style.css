@@ -1,0 +1,59 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 8, 2023, 1:07:48 AM
+    Author     : FPTSHOP
+*/
+h1{
+    font-family: sans-serif;
+}
+b{
+    color: white;
+    background: linear-gradient(to bottom, orange,#ff9933);
+    border-radius: 5px;
+    padding: 3px
+}
+*{
+    margin: 10px
+}
+legend{
+    text-align: center;
+}
+.btn{
+     background: linear-gradient(to bottom, white,#E8E3E3);
+     margin: unset
+}
+.body{
+    display: flex;
+    text-align: center;
+    
+}
+.form{
+    width: 50%;
+    margin: auto;
+    border: solid 1px #ccc; 
+    
+    
+}
+.header{
+    background-color: #ff9933;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+p{
+    text-align: center;
+    color: white;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333; /* Màu nền của footer */
+    color: #fff; /* Màu chữ của footer */
+    padding: 10px; /* Khoảng cách bên trong footer */
+    text-align: center; /* Căn giữa nội dung của footer */
+}

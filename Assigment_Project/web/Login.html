@@ -5,11 +5,64 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>FPT University Academic Portal</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap-grid.css"/>
+        <link rel="stylesheet" href="Css/style.css"/>
+        <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap.css"/>
+        <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap.min.css"/>
     </head>
-    <body>
-        <div>TODO write content</div>
+    <body style="background-color: #414045">
+        <div class="row header">
+            <div class="col-md">
+                <h1>FPT University Academic Portal</h1>
+            </div>
+            <div class="col-md-4">
+                <table class="right-header">
+                    <tbody>
+                        <tr>
+                            <td colspan="2"> <h5 style="text-align: center;">FAP mobile app (myFAP) is ready at</h5></td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://apps.apple.com/app/id1527723314">
+                                    <img src="https://fap.fpt.edu.vn/images/app-store.png" style="width: 120px; height: 40px" alt="apple store"></a></td>
+                            <td><a href="https://play.google.com/store/apps/details?id=com.fuct">
+                                    <img src="https://fap.fpt.edu.vn/images/play-store.png" style="width: 120px; height: 40px" alt="google store"></a></td>
+                        </tr>
+                    </tbody></table>
+            </div>
+        </div>
+        <div class="form">
+                <fieldset>
+                    <legend><b>Sinh viên, Giảng viên</b></legend>
+                    <br>
+                    <div>
+                        <div class="row body">
+                            <div class="col">
+                                <select class="btn">
+                                    <option selected="selected">Select Campus</option>
+                                    <option value="3">FU-Hòa Lạc</option>
+                                    <option value="4">FU-Hồ Chí Minh</option>
+                                    <option value="5">FU-Đà Nẵng</option>
+                                    <option value="6">FU-Cần Thơ</option>
+                                    <option value="7">FU-Quy Nhơn</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <span class="btn">Login With Google</span>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </fieldset>
+            </div>
+        <footer>
+            <p >
+                © Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>&nbsp;|&nbsp;
+                <a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>&nbsp;|&nbsp; <a href="http://library.fpt.edu.vn" target="_blank">library</a>&nbsp;|&nbsp; <a href="http://library.books24x7.com" target="_blank">books24x7</a>
+                <span id="ctl00_lblHelpdesk"></span>
+            </p>
+        </footer>
     </body>
 </html>
