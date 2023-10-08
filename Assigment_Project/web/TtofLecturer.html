@@ -11,9 +11,259 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap-grid.css"/>
         <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap.css"/>
         <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="Css/TtofStudent.css"/>
+        <link rel="stylesheet" href="Css/TtofLecturer.css"/>
     </head>
-    <body >
-       
+    <body style="background-color: #414045">
+       <div class="row header">
+            <div class="col-md">
+                <h1>FPT University Academic Portal</h1>
+            </div>
+            <div class="col-md-4">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="2"> <h5 class="mid-title">FAP mobile app (myFAP) is ready at</h5></td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://apps.apple.com/app/id1527723314">
+                                    <img src="https://fap.fpt.edu.vn/images/app-store.png" style="width: 120px; height: 40px" alt="apple store"></a></td>
+                            <td><a href="https://play.google.com/store/apps/details?id=com.fuct">
+                                    <img src="https://fap.fpt.edu.vn/images/play-store.png" style="width: 120px; height: 40px" alt="google store"></a></td>
+                        </tr>
+                    </tbody></table>
+            </div>
+       </div>
+           <div class="row information">
+            <div class="col-md-12">
+                <form>
+                    
+                            <b>View Schedule</b>                       
+                    <center>
+                        <label>Campus:</label>
+                        <select style="border-radius: 3px">
+                            <option value="1">FU-HN</option>
+                            <option value="2">FU-HCM</option>
+                            <option value="3">FU-ÐN</option>
+                            <option value="4">FU-CT</option>
+                            <option value="5">FU-QN</option>
+                        </select><br>
+                         <label>Lecturer:</label>
+                         <input type="text" style="border-radius: 3px"><input type="submit" value="View" style="border-radius: 3px">
+                    </center>                                                               
+                                    <table class="tt">
+                                        <thead>
+                                            <tr>
+                                                <th rowspan="2" style="text-align: left">
+                                                    <span>Year</span>
+                                                    <select class="btn">
+                                                        <option value="2020">2020</option>
+                                                        <option value="2021">2021</option>
+                                                        <option value="2022">2022</option>
+                                                        <option value="2023">2023</option>
+                                                        <option value="2024">2024</option>
+                                                    </select>
+                                                    <br>
+                                                    <span>Week</span>
+                                                    <select class="btn">
+                                                        <option value="1">02/01 To 08/01</option>
+                                                        <option value="2">09/01 To 15/01</option>
+                                                        <option value="3">16/01 To 22/01</option>
+                                                        <option value="4">23/01 To 29/01</option>
+                                                        <option value="5">30/01 To 05/02</option>
+                                                        <option value="6">06/02 To 12/02</option>
+                                                        <option value="7">13/02 To 19/02</option>
+                                                        <option value="8">20/02 To 26/02</option>
+                                                        <option value="9">27/02 To 05/03</option>
+                                                        <option value="10">06/03 To 12/03</option>
+                                                        <option value="11">13/03 To 19/03</option>
+                                                        <option value="12">20/03 To 26/03</option>
+                                                        <option value="13">27/03 To 02/04</option>
+                                                        <option value="14">03/04 To 09/04</option>
+                                                        <option value="15">10/04 To 16/04</option>
+                                                        <option value="16">17/04 To 23/04</option>
+                                                        <option value="17">24/04 To 30/04</option>
+                                                        <option value="18">01/05 To 07/05</option>
+                                                        <option value="19">08/05 To 14/05</option>
+                                                        <option value="20">15/05 To 21/05</option>
+                                                        <option value="21">22/05 To 28/05</option>
+                                                        <option value="22">29/05 To 04/06</option>
+                                                        <option value="23">05/06 To 11/06</option>
+                                                        <option value="24">12/06 To 18/06</option>
+                                                        <option value="25">19/06 To 25/06</option>
+                                                        <option value="26">26/06 To 02/07</option>
+                                                        <option value="27">03/07 To 09/07</option>
+                                                        <option value="28">10/07 To 16/07</option>
+                                                        <option value="29">17/07 To 23/07</option>
+                                                        <option value="30">24/07 To 30/07</option>
+                                                        <option value="31">31/07 To 06/08</option>
+                                                        <option value="32">07/08 To 13/08</option>
+                                                        <option value="33">14/08 To 20/08</option>
+                                                        <option value="34">21/08 To 27/08</option>
+                                                        <option value="35">28/08 To 03/09</option>
+                                                        <option value="36">04/09 To 10/09</option>
+                                                        <option value="37">11/09 To 17/09</option>
+                                                        <option value="38">18/09 To 24/09</option>
+                                                        <option value="39">25/09 To 01/10</option>
+                                                        <option value="40">02/10 To 08/10</option>
+                                                        <option value="41">09/10 To 15/10</option>
+                                                        <option value="42">16/10 To 22/10</option>
+                                                        <option value="43">23/10 To 29/10</option>
+                                                        <option value="44">30/10 To 05/11</option>
+                                                        <option value="45">06/11 To 12/11</option>
+                                                        <option value="46">13/11 To 19/11</option>
+                                                        <option value="47">20/11 To 26/11</option>
+                                                        <option value="48">27/11 To 03/12</option>
+                                                        <option value="49">04/12 To 10/12</option>
+                                                        <option value="50">11/12 To 17/12</option>
+                                                        <option value="51">18/12 To 24/12</option>
+                                                        <option value="52">25/12 To 31/12</option>
+                                                    </select>
+                                                </th>
+                                                <th>Mon</th>
+                                                <th>Tue</th>
+                                                <th>Wed</th>
+                                                <th>Thu</th>
+                                                <th>Fri</th>
+                                                <th>Sat</th>
+                                                <th>Sun</th>
+                                            </tr>
+                                            <tr>
+                                                <th>02/10</th>
+                                                <th>03/10</th>
+                                                <th>04/10</th>
+                                                <th>05/10</th>
+                                                <th>06/10</th>
+                                                <th>07/10</th>
+                                                <th>08/10</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Slot 0 </td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Slot 1 </td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Slot 2 </td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Slot 3 </td>
+                                                <td>-</td>
+                                                <td>
+                                                   -
+                                                </td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-
+                                                </td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Slot 4 </td>
+                                                <td>
+                                                    <p>
+                                                        <a style="text-align: center;" href="../Schedule/ActivityDetail.aspx?id=1417314">SE1763-PRJ301<br> at BE-202</a><a> <br>(<font color="Green">attended</font>)<br>
+                                                            <span class="time-slot">(15:20-17:40)</span><br>
+                                                        </a>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p>
+                                                        <a href="../Schedule/ActivityDetail.aspx?id=1417894">SE1763-MAS291<br> at DE-421</a>
+                                                          <a> <br>(<font color="Green">attended</font>)<br><span class="time-slot">(15:20-17:40)</span><br></a>
+                                                    </p>
+                                                </td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>
+                                                    -
+                                                </td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Slot 5 </td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Slot 6 </td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td>
+                                                <td>-</td></tr><tr><td>Slot 7 </td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Slot 8 </td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Slot 9 </td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+                                        </tbody>
+                                    </table>
+                                    <p>
+                                        <br><b>More note / Chú thích thêm:</b>
+                                    </p>
+                                    <div><ul><li>(<font color="green">attended</font>): anhnhhe176236 had attended this activity / Nguyễn Hoàng Anh đã tham gia hoạt động này</li><li>(<font color="red">absent</font>): anhnhhe176236 had NOT attended this activity / Nguyễn Hoàng Anh đã vắng mặt buổi này</li> <li>(-): no data was given / chưa có dữ liệu</li> </ul></div>
+                                    <p>
+                                    </p>
+
+                               
+                            <tr>
+                                <td>                                  
+                            <tr>
+                                <td>                     
+                                        <br>
+                                        <b>Mọi góp ý, thắc mắc xin liên hệ:</b>
+                                        <b>Phòng dịch vụ sinh viên</b><br>
+                                        <table >
+                                            <tbody>
+                                                <tr>
+                                                    <th> Email:</th>
+                                                    <th><a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a></th>
+                                                </tr>                                           
+                                                <tr>
+                                                    <td> Điện thoại:</td>
+                                                    <td><span>(024)7308.13.13 </span></td>
+                                                </tr>                                                
+                                            </tbody>
+                                        </table>                                        
+                                        <br>
+                                
+                </form>
+            </div>
+        </div>
+           
+           <footer>
+            <p>
+                © Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>&nbsp;|&nbsp;
+                <a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>&nbsp;|&nbsp; <a href="http://library.fpt.edu.vn" target="_blank">library</a>&nbsp;|&nbsp; <a href="http://library.books24x7.com" target="_blank">books24x7</a>
+                    
+            </p>
+        </footer>
     </body>
 </html>

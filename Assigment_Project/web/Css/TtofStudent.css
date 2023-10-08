@@ -42,11 +42,10 @@ footer {
     text-align: center;
 }
 .tt{
-    border: #333 solid ;
     text-align: center;
 }
 .tt th {
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #fff;
     border-right: 1px solid #fff;
     padding: 2px;
     text-transform: uppercase;
@@ -56,5 +55,5 @@ footer {
 }
 .tt td {
     border-bottom: 1px solid #333;
-    border-right: 1px solid #333;
+    border: 1px solid #333;
 }
