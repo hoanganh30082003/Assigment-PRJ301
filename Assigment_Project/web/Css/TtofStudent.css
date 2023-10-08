@@ -3,11 +3,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : Oct 8, 2023, 1:07:48 AM
+    Created on : Oct 8, 2023, 5:16:41 PM
     Author     : FPTSHOP
 */
-h1{
-    font-family: sans-serif;
+
+.information{
+    color: white;
 }
 b{
     color: white;
@@ -16,26 +17,12 @@ b{
     padding: 3px
 }
 *{
-    margin: 10px
-}
-legend{
-    text-align: center;
+    margin: 10px;
+    font-family: sans-serif;
 }
 .btn{
-     background: linear-gradient(to bottom, white,#E8E3E3);
-     margin: unset
-}
-.body{
-    display: flex;
-    text-align: center;
-    
-}
-.form{
-    width: 50%;
-    margin: auto;
-    border: solid 1px #ccc; 
-    
-    
+    background: linear-gradient(to bottom, white,#E8E3E3);
+    margin: unset
 }
 .header{
     background-color: #ff9933;
@@ -43,17 +30,31 @@ legend{
     justify-content: center;
     align-items: center;
 }
-p{
-    text-align: center;
-    color: white;
-}
 footer {
-    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #333; /* Màu nền của footer */
     color: #fff; /* Màu chữ của footer */
     padding: 10px; /* Khoảng cách bên trong footer */
     text-align: center; /* Căn giữa nội dung của footer */
+}
+.mid-title{
+    text-align: center;
+}
+.tt{
+    border: #333 solid ;
+    text-align: center;
+}
+.tt th {
+    border-bottom: 1px solid #333;
+    border-right: 1px solid #fff;
+    padding: 2px;
+    text-transform: uppercase;
+    height: 23px;
+    background-color: #9999ff;
+    font-weight: normal;
+}
+.tt td {
+    border-bottom: 1px solid #333;
+    border-right: 1px solid #333;
 }
