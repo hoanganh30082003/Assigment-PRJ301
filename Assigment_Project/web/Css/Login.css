@@ -6,20 +6,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : Oct 8, 2023, 1:07:48 AM
     Author     : FPTSHOP
 */
-
 b{
     color: white;
     background: linear-gradient(to bottom, orange,#ff9933);
     border-radius: 5px;
-    padding: 3px
+    padding: 3px;
 }
 *{
     margin: 10px;
     font-family: sans-serif;
 }
-legend{
-    text-align: center;
-}
+
 .btn{
      background: linear-gradient(to bottom, white,#E8E3E3);
      margin: unset
@@ -52,5 +49,14 @@ footer {
 .mid-title{
     text-align: center;
 }
-                                           
+.input{
+    width: 50%;
+    margin: auto;
+    border: 1px solid whitesmoke;
+    border-radius: 5px;
+}
+.login-main{
+    width: 50%;
+    margin: auto;
+}                                           
                     
