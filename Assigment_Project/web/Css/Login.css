@@ -19,7 +19,7 @@ b{
 
 .btn{
      background: linear-gradient(to bottom, white,#E8E3E3);
-     margin: unset
+     margin: unset;
 }
 .body{
     display: flex;
@@ -56,7 +56,29 @@ footer {
     border-radius: 5px;
 }
 .login-main{
-    width: 50%;
-    margin: auto;
+     display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
 }                                           
-                    
+#title{
+    text-align: center;
+    font-size: 30px;
+}                    
+table{
+    width: 50%;
+    text-align: center;
+   
+}
+#input{
+    width: 40%;
+    border-radius: 5px;
+}
+.inline{
+    display: flex; 
+    justify-content: center;
+}
+tr td {
+    padding: 0;
+}
+

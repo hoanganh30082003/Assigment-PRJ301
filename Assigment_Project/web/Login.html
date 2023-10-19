@@ -36,21 +36,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             </div>
             <div class="login-main">
                 <table>
-                    <tr><td><b>Giảng viên</b></td></tr>
+                    <tr><td id="title"><b >Giảng viên</b></td></tr>
+                    
                     <tr> 
                         <td>
                             <label style="color: white">Username:</label>
-                            <input type="text" name="username" required>
+                            <input type="text" name="username" id="input" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label for="password" style="color: white">Password:</label>
-                            <input type="password"  name="password" required>
+                            <input type="password"  name="password" id="input" required>
                         </td>
                     </tr>
-                    <tr>
-                        <td><select class="btn">
+                    <tr class="inline">
+                        <td ><select class="btn">
                                 <option selected="selected">Select Campus</option>
                                 <option value="3">FU-Hòa Lạc</option>
                                 <option value="4">FU-Hồ Chí Minh</option>
@@ -58,8 +59,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                 <option value="6">FU-Cần Thơ</option>
                                 <option value="7">FU-Quy Nhơn</option>
                             </select></td>
+                            <td><input class="btn" type="submit" value="Login"></td>
                     </tr>
-                    <tr><td><input class="btn" type="submit" value="Login"></td></tr>
+                    
                 </table>
             </div>
             <footer>
