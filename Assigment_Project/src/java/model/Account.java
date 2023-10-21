@@ -8,10 +8,10 @@ package model;
  *
  * @author FPTSHOP
  */
-public class User {
+public class Account implements IBaseModel{
     String username;
     String password;
-    String displayname;
+
     public String getUsername() {
         return username;
     }
@@ -19,7 +19,6 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
-
     public String getPassword() {
         return password;
     }
@@ -27,13 +26,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getDisplayname() {
-        return displayname;
-    }
-
-    public void setDisplayname(String displayname) {
-        this.displayname = displayname;
-    }
-    
+   
 }

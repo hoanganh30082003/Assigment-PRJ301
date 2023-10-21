@@ -5,6 +5,8 @@
 
 package Controller;
 
+import dal.AccountDBContext;
+import dal.DBcontext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Account;
 
 /**
  *
@@ -68,7 +71,19 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        String user = request.getParameter("username");
+        String password = request.getParameter("password");
+        Account param = new Account();
+        param.setUsername(user);
+        param.setPassword(password);
+        AccountDBContext db = new AccountDBContext();
+        Account loggedAcc = db.get(param);
+        if(loggedAcc != null){
+        request.getRequestDispatcher("TtofLecturer.html").forward(request, response);
+        }else{
+            String error = "Invalid username or password!!";
+            request.setAttribute("error", error);
+        }
     }
 
     /** 
