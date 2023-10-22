@@ -39,15 +39,17 @@ public class AccountDBContext extends DBcontext<Account> {
             String sql = "SELECT [username]\n"
                     + "      ,[password]\n"
                     + "  FROM [Account]\n"
-                    + "  where username = ? and password = ? ";
+                    + "  where username = ? and password = ? and campus_id = ? ";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, model.getUsername());
             stm.setString(2, model.getPassword());
+            stm.setString(3, model.getCampus_id());
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 Account acc = new Account();
                 acc.setUsername(model.getUsername());
                 acc.setPassword(model.getPassword());
+                acc.setCampus_id(model.getCampus_id());
                 return acc;
             }
         } catch (SQLException ex) {
