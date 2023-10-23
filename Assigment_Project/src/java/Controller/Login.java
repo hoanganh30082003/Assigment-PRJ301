@@ -5,7 +5,9 @@
 package Controller;
 
 import dal.AccountDBContext;
+import dal.CampusDB;
 import dal.DBcontext;
+import dal.InstructorDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -77,11 +79,14 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         String user = request.getParameter("username");
         String password = request.getParameter("password");
-        String campus = request.getParameter("campus");
+        String campus_id = request.getParameter("campus");
         Account param = new Account();
         param.setUsername(user);
         param.setPassword(password);
-        param.setCampus_id(campus);
+        CampusDB cdb = new CampusDB();
+        InstructorDB idb = new InstructorDB();
+        
+        param.setCampus(cdb.getById(campus_id));
         AccountDBContext db = new AccountDBContext();
         Account loggedAcc = db.get(param);
         if (loggedAcc != null) {

@@ -12,7 +12,7 @@ public class Account implements IBaseModel{
     String username;
     String password;
     Instructor instructor;
-    String campus_id;
+    Campus campus;
     public String getUsername() {
         return username;
     }
@@ -36,14 +36,13 @@ public class Account implements IBaseModel{
         this.instructor = instructor;
     }
 
-    public String getCampus_id() {
-        return campus_id;
+    public Campus getCampus() {
+        return campus;
     }
 
-    public void setCampus_id(String campus_id) {
-        this.campus_id = campus_id;
+    public void setCampus(Campus campus) {
+        this.campus = campus;
     }
 
     
-   
 }

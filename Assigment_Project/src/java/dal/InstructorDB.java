@@ -4,63 +4,62 @@
  */
 package dal;
 
+import com.oracle.wls.shaded.org.apache.bcel.generic.AALOAD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Account;
+import model.Instructor;
 
 /**
  *
  * @author FPTSHOP
  */
-public class AccountDBContext extends DBcontext<Account> {
+public class InstructorDB extends DBcontext<Instructor> {
 
     @Override
-    public void insert(Account model) {
+    public void insert(Instructor model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Account model) {
+    public void update(Instructor model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void remove(Account model) {
+    public void remove(Instructor model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public Account get(Account model) {
+    public Instructor getById(String instructor_id) {
+        String sql = "select * from Instructor \n"
+                + "where instructor_id = ?";
         try {
-            String sql = "SELECT [username]\n"
-                    + "      ,[password]\n"
-                    + "  FROM [Account]\n"
-                    + "  where username = ? and password = ? and campus_id = ? ";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, model.getUsername());
-            stm.setString(2, model.getPassword());
-            stm.setString(3, model.getCampus().getCampus_id());
-            ResultSet rs = stm.executeQuery();
-            if (rs.next()) {
-                Account acc = new Account();
-                acc.setUsername(model.getUsername());
-                acc.setPassword(model.getPassword());
-                acc.setCampus(model.getCampus());
-                acc.setInstructor(rs.get);
-                return acc;
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, instructor_id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Instructor i = new Instructor();
+                i.setInstructor_id(rs.getString("instructor_id"));
+                i.setInstructor_name(rs.getString("instructor_name"));
+                return i;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InstructorDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
     @Override
-    public ArrayList<Account> list() {
+    public ArrayList<Instructor> list() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Instructor get(Instructor model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
