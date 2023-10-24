@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Account;
 import model.Instructor;
 
 /**
@@ -34,12 +35,15 @@ public class InstructorDB extends DBcontext<Instructor> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public Instructor getById(String instructor_id) {
-        String sql = "select * from Instructor \n"
-                + "where instructor_id = ?";
+    public Instructor getByUsernamePassword(String username, String password) {
+        String sql = "SELECT i.instructor_id, instructor_name\n"
+                + "  FROM [dbo].Instructor i\n"
+                + "  inner join Account a on a.instructor_id = i.instructor_id\n"
+                + "  where username = ? and password = ?;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, instructor_id);
+            st.setString(1, username);
+            st.setString(2, password);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Instructor i = new Instructor();

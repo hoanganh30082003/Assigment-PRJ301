@@ -36,8 +36,7 @@ public class AccountDBContext extends DBcontext<Account> {
     @Override
     public Account get(Account model) {
         try {
-            String sql = "SELECT [username]\n"
-                    + "      ,[password]\n"
+            String sql = "SELECT *\n"
                     + "  FROM [Account]\n"
                     + "  where username = ? and password = ? and campus_id = ? ";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -50,7 +49,7 @@ public class AccountDBContext extends DBcontext<Account> {
                 acc.setUsername(model.getUsername());
                 acc.setPassword(model.getPassword());
                 acc.setCampus(model.getCampus());
-                acc.setInstructor(rs.get);
+                acc.setInstructor(model.getInstructor());
                 return acc;
             }
         } catch (SQLException ex) {

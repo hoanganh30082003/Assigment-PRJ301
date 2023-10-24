@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Account;
 import model.Campus;
+import model.Instructor;
 
 /**
  *
@@ -84,13 +85,16 @@ public class Login extends HttpServlet {
         param.setUsername(user);
         param.setPassword(password);
         CampusDB cdb = new CampusDB();
-        InstructorDB idb = new InstructorDB();
-        
         param.setCampus(cdb.getById(campus_id));
         AccountDBContext db = new AccountDBContext();
         Account loggedAcc = db.get(param);
         if (loggedAcc != null) {
-            request.getRequestDispatcher("TtofLecturer.html").forward(request, response);
+            InstructorDB idb = new InstructorDB();
+            Instructor i = idb.getByUsernamePassword(loggedAcc.getUsername(), loggedAcc.getPassword());
+            Campus c = cdb.getById(campus_id);
+            request.setAttribute("campus", c);
+            request.setAttribute("instructor",i);
+            request.getRequestDispatcher("ttOfInstructor.jsp").forward(request, response);
         } else {
             String error = "Invalid username or password or campus!";
             request.setAttribute("error", error);
