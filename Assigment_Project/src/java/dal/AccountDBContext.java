@@ -16,24 +16,7 @@ import model.Account;
  *
  * @author FPTSHOP
  */
-public class AccountDBContext extends DBcontext<Account> {
-
-    @Override
-    public void insert(Account model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void update(Account model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void remove(Account model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
+public class AccountDBContext extends DBcontext<Account> {       
     public Account get(Account model) {
         try {
             String sql = "SELECT *\n"
@@ -57,10 +40,4 @@ public class AccountDBContext extends DBcontext<Account> {
         }
         return null;
     }
-
-    @Override
-    public ArrayList<Account> list() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }

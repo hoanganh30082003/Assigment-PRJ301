@@ -19,22 +19,6 @@ import model.Instructor;
  * @author FPTSHOP
  */
 public class InstructorDB extends DBcontext<Instructor> {
-
-    @Override
-    public void insert(Instructor model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void update(Instructor model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void remove(Instructor model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     public Instructor getByUsernamePassword(String username, String password) {
         String sql = "SELECT i.instructor_id, instructor_name\n"
                 + "  FROM [dbo].Instructor i\n"
@@ -56,15 +40,4 @@ public class InstructorDB extends DBcontext<Instructor> {
         }
         return null;
     }
-
-    @Override
-    public ArrayList<Instructor> list() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Instructor get(Instructor model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }

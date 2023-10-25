@@ -46,7 +46,7 @@
                         <label>Campus: ${c.getCampus_name()}</label>
                         
                         <c:set scope="request" var="i" value="${instructor}" />
-                        <label>Lecturer: ${i.getInstructor_name()}</label>
+                        <label >Lecturer: ${i.getInstructor_name()}</label>
 
                     </center>                                                               
                     <table class="tt">
