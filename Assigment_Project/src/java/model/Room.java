@@ -8,7 +8,7 @@ package model;
  *
  * @author FPTSHOP
  */
-public class Room {
+public class Room  implements IBaseModel{
     String room_id;
 
     public String getRoom_id() {

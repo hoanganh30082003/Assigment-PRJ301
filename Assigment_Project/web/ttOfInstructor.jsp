@@ -15,7 +15,23 @@
         <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap.css"/>
         <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="Css/TtofLecturer.css"/>
+        <script >
+            document.addEventListener("DOMContentLoaded", function () {
+                // Lấy tham chiếu đến form và các trường input
+                var form = document.getElementById("myForm");
+                var fromDateInput = document.getElementById("fromDate");
+                var toDateInput = document.getElementById("toDate");
 
+                // Thêm sự kiện "change" cho các trường input
+                fromDateInput.addEventListener("change", function () {
+                    form.submit(); // Gửi form khi trường "fromDate" thay đổi
+                });
+
+                toDateInput.addEventListener("change", function () {
+                    form.submit(); // Gửi form khi trường "toDate" thay đổi
+                });
+            });
+        </script>
     </head>
     <body style="background-color: #414045">
         <div class="row header">
@@ -40,136 +56,49 @@
         <div class="row information">
             <div class="col-md-12">
                 <form action="timetable" method="get">
-                    <b>View Schedule</b>                       
+                    <b>View Schedule</b>
+                    <c:set scope="request" var="d" value="${data}"/>
+                    <label>Campus: ${d.getCampus().getCampus_name()}</label>
+                    <label>Lecturer: ${d.getInstructor().getInstructor_name()}</label>
                     <center>
-                        <c:set scope="request" var="c" value="${campus}" />
-                        <label>Campus: ${c.getCampus_name()}</label>
-                        
-                        <c:set scope="request" var="i" value="${instructor}" />
-                        <label >Lecturer: ${i.getInstructor_name()}</label>
-
+                        <form id="myForm" action="schedule">
+                            <label>From</label>
+                            <input type="date" class="btn"id="fromDate" name="from">
+                            <label>To</label>
+                            <input type="date"  class="btn" id="toDate" name="to">
+                            <input type="hidden" name="id" value="${d.getInstructor().getInstructor_id()}">
+                            <input type="submit" value="View" class="btn">
+                        </form>
                     </center>                                                               
                     <table class="tt">
                         <thead>
                             <tr>
-                                <th rowspan="2" style="text-align: left">
-                                    <label>Start time</label>
-                                    <input type="date" class="btn">
-                                    <br>
-                                    <label>End time</label>
-                                    <input type="date"  class="btn" >
-                                    
-                                </th>
-                                <th>Mon</th>
-                                <th>Tue</th>
-                                <th>Wed</th>
-                                <th>Thu</th>
-                                <th>Fri</th>
-                                <th>Sat</th>
-                                <th>Sun</th>
-                            </tr>
-                            <tr>
-                                <th>02/10</th>
-                                <th>03/10</th>
-                                <th>04/10</th>
-                                <th>05/10</th>
-                                <th>06/10</th>
-                                <th>07/10</th>
-                                <th>08/10</th>
+                                
+
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Slot 0 </td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td>Slot 1 </td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td>Slot 2 </td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td>Slot 3 </td>
-                                <td>-</td>
-                                <td>
-                                    -
-                                </td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-
-                                </td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td>Slot 4 </td>
-                                <td>
-                                    <p>
-                                        <a style="text-align: center;" href="../Schedule/ActivityDetail.aspx?id=1417314">SE1763-PRJ301<br> at BE-202</a><a> <br>(<font color="Green">attended</font>)<br>
-                                            <span class="time-slot">(15:20-17:40)</span><br>
-                                        </a>
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        <a href="../Schedule/ActivityDetail.aspx?id=1417894">SE1763-MAS291<br> at DE-421</a>
-                                        <a> <br>(<font color="Green">attended</font>)<br><span class="time-slot">(15:20-17:40)</span><br></a>
-                                    </p>
-                                </td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>
-                                    -
-                                </td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td>Slot 5 </td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td>Slot 6 </td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td></tr><tr><td>Slot 7 </td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Slot 8 </td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Slot 9 </td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+                            <c:forEach items="${requestScope.slot}" var="l">
+                                <tr>
+                                    <td>
+                                        ${l.slot_id}
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
                     </table>
                     <p>
                         <br><b>More note / Chú thích thêm:</b>
                     </p>
-                    <div><ul><li>(<font color="green">attended</font>): anhnhhe176236 had attended this activity / Nguyễn Hoàng Anh đã tham gia hoạt động này</li><li>(<font color="red">absent</font>): anhnhhe176236 had NOT attended this activity / Nguyễn Hoàng Anh đã vắng mặt buổi này</li> <li>(-): no data was given / chưa có dữ liệu</li> </ul></div>
+                    <div>
+                        <ul>
+                            <li>
+                                (<font color="green">attended</font>): ${d.getInstructor().getInstructor_name()} đã tham gia hoạt động này</li>
+                            <li>
+                                (<font color="red">absent</font>): ${d.getInstructor().getInstructor_name()} đã vắng mặt buổi này</li> 
+                            <li>(-): no data was given / chưa có dữ liệu</li> 
+                        </ul>
+                    </div>
                     <p>
                     </p>
 

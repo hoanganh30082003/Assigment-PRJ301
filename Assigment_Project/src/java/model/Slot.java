@@ -10,7 +10,7 @@ import java.sql.Time;
  *
  * @author FPTSHOP
  */
-public class Slot {
+public class Slot implements IBaseModel{
     String slot_id;
     Time starttime, endtime;
 

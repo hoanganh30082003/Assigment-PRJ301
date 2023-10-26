@@ -6,8 +6,8 @@ package Controller;
 
 import dal.AccountDBContext;
 import dal.CampusDB;
-import dal.DBcontext;
 import dal.InstructorDB;
+import dal.SlotDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,9 +15,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 import model.Account;
 import model.Campus;
 import model.Instructor;
+import model.Slot;
 
 /**
  *
@@ -88,18 +90,17 @@ public class Login extends HttpServlet {
         param.setCampus(cdb.getById(campus_id));
         AccountDBContext db = new AccountDBContext();
         Account loggedAcc = db.get(param);
-        
-        if (loggedAcc != null && loggedAcc.getCampus()!= null) {
-            InstructorDB idb = new InstructorDB();
-            Instructor i = idb.getByUsernamePassword(loggedAcc.getUsername(), loggedAcc.getPassword());
-            Campus c = cdb.getById(campus_id);
-            request.setAttribute("campus", c);
-            request.setAttribute("instructor",i);
+        SlotDB sl = new SlotDB();
+        List<Slot> list = sl.getSlot();
+
+        if (loggedAcc != null) {
+            request.setAttribute("slot", list);
+            request.setAttribute("data", loggedAcc);
             request.getRequestDispatcher("ttOfInstructor.jsp").forward(request, response);
         } else {
             String error = "Invalid username or password or campus!";
             request.setAttribute("error", error);
-                    request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
 
         }
     }

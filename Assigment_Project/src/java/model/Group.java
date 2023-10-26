@@ -8,9 +8,8 @@ package model;
  *
  * @author FPTSHOP
  */
-public class Group {
+public class Group implements IBaseModel{
     String group_id;
-
     public String getGroup_id() {
         return group_id;
     }

@@ -5,8 +5,8 @@
 
 package Controller;
 
+import dal.TtOfInstructorDB;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,18 +30,12 @@ public class TtOfInstructor extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet TtOfInstructor</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet TtOfInstructor at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        String id = request.getParameter("id");
+        String fromDate = request.getParameter("from");
+        String toDate = request.getParameter("to");
+        TtOfInstructorDB tdb = new TtOfInstructorDB();
+        
+        request.getRequestDispatcher("ttOfInstructor.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

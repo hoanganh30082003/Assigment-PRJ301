@@ -10,7 +10,16 @@ package model;
  */
 public class Course {
     String course_id, course_name;
+    Group group;
 
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+     
     public String getCourse_id() {
         return course_id;
     }

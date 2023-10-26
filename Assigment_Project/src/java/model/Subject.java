@@ -10,7 +10,25 @@ package model;
  */
 public class Subject {
     String subject_id, subject_name;
+    Instructor instructor;
+    Course course;
 
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+    
     public String getSubject_id() {
         return subject_id;
     }
