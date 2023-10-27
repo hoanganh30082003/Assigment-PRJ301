@@ -15,23 +15,7 @@
         <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap.css"/>
         <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="Css/TtofLecturer.css"/>
-        <script >
-            document.addEventListener("DOMContentLoaded", function () {
-                // Lấy tham chiếu đến form và các trường input
-                var form = document.getElementById("myForm");
-                var fromDateInput = document.getElementById("fromDate");
-                var toDateInput = document.getElementById("toDate");
-
-                // Thêm sự kiện "change" cho các trường input
-                fromDateInput.addEventListener("change", function () {
-                    form.submit(); // Gửi form khi trường "fromDate" thay đổi
-                });
-
-                toDateInput.addEventListener("change", function () {
-                    form.submit(); // Gửi form khi trường "toDate" thay đổi
-                });
-            });
-        </script>
+        
     </head>
     <body style="background-color: #414045">
         <div class="row header">
@@ -55,34 +39,46 @@
         </div>
         <div class="row information">
             <div class="col-md-12">
-                <form action="timetable" method="get">
+                
                     <b>View Schedule</b>
                     <c:set scope="request" var="d" value="${data}"/>
                     <label>Campus: ${d.getCampus().getCampus_name()}</label>
                     <label>Lecturer: ${d.getInstructor().getInstructor_name()}</label>
                     <center>
-                        <form id="myForm" action="schedule">
+
+                        <form  action="schedule"method="get">
                             <label>From</label>
-                            <input type="date" class="btn"id="fromDate" name="from">
+                            <input type="date" class="btn" name="from" value="${requestScope.from}">
                             <label>To</label>
-                            <input type="date"  class="btn" id="toDate" name="to">
+                            <input type="date"  class="btn"  name="to" value="${requestScope.to}">
                             <input type="hidden" name="id" value="${d.getInstructor().getInstructor_id()}">
                             <input type="submit" value="View" class="btn">
                         </form>
-                    </center>                                                               
+                    </center>
+                    <c:set scope="request" value="${session}" var="s"/>
                     <table class="tt">
                         <thead>
                             <tr>
-                                
-
+                                <c:forEach items="${requestScope.dates}" var="d">
+                                    <td></td>
+                                    <td>${d}</td>
+                                </c:forEach>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${requestScope.slot}" var="l">
+                            <c:forEach items="${requestScope.slots}" var="l">
                                 <tr>
-                                    <td>
-                                        ${l.slot_id}
-                                    </td>
+                                    <td>${l.slot_id}</td>
+                                    <c:forEach items="${requestScope.dates}" var="d" varStatus="loop">
+                                        <c:forEach items="${requestScope.session}" var="s">
+                                        <td>
+                                            <c:if test="${s.date eq d and s.getSlot().getSlot_id eq l.slot_id}">
+                                                <a href="#">${s.subject}-${s.room}</a>
+                                            </c:if>
+                                            
+                                        </td>
+                                        </c:forEach>
+                                    </c:forEach>
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -123,19 +119,16 @@
                                 </tbody>
                             </table>                                        
                             <br>
-
-                </form>
             </div>
         </div>
 
         <footer>
             <p>
                 © Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>&nbsp;|&nbsp;
-                <a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>&nbsp;|&nbsp; <a href="http://library.fpt.edu.vn" target="_blank">library</a>&nbsp;|&nbsp; <a href="http://library.books24x7.com" target="_blank">books24x7</a>
-
+                <a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>&nbsp;|&nbsp; 
+                <a href="http://library.fpt.edu.vn" target="_blank">library</a>&nbsp;|&nbsp; 
+                <a href="http://library.books24x7.com" target="_blank">books24x7</a>
             </p>
         </footer>
-
-
     </body>
 </html>
