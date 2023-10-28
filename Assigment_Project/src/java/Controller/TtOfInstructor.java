@@ -58,7 +58,7 @@ public class TtOfInstructor extends HttpServlet {
         Date toDate = dates.get(dates.size() - 1);
 
         SessionDB tdb = new SessionDB();
-        List<Session> list = tdb.getLecture(id, fromDate, toDate);
+        List<Session> list = tdb.getSession(id, fromDate, toDate);
 
         SlotDB sl = new SlotDB();
         List<Slot> slots = sl.getSlot();
@@ -73,11 +73,7 @@ public class TtOfInstructor extends HttpServlet {
             System.out.println(session.getSession_id());
             System.out.println(session.getGroup_id());
         }
-        System.out.println(list);
-        System.out.println(dates);
-        System.out.println(fromDate);
-        System.out.println(toDate);
-        System.out.println("id:"+id);
+        
         request.setAttribute("slots", slots);
         request.setAttribute("dates", dates);
         request.setAttribute("dateFormat", dateFormat);

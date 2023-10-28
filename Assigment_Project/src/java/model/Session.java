@@ -5,6 +5,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,6 +22,16 @@ public class Session implements IBaseModel {
     Instructor instructor;
     boolean isAtt;
     Date submit;
+    ArrayList<Status> status = new ArrayList<>();
+    
+    public ArrayList<Status> getStatus() {
+        return status;
+    }
+
+    public void setStatus(ArrayList<Status> status) {
+        this.status = status;
+    }
+    
 
     public boolean isIsAtt() {
         return isAtt;
@@ -94,5 +105,4 @@ public class Session implements IBaseModel {
         this.instructor = instructor;
     }
 
-   
 }

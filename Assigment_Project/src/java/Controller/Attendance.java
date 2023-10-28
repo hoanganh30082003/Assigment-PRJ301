@@ -5,6 +5,7 @@
 
 package Controller;
 
+import dal.SessionDB;
 import dal.StatusDB;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import model.Session;
 import model.Status;
+import model.Student;
 
 /**
  *
@@ -22,28 +24,7 @@ import model.Status;
  */
 @WebServlet(name="Attendance", urlPatterns={"/attendance"})
 public class Attendance extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
-    } 
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
-     * Handles the HTTP <code>GET</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -55,26 +36,30 @@ public class Attendance extends HttpServlet {
         request.getRequestDispatcher("Attendance.jsp").forward(request, response);
     } 
 
-    /** 
-     * Handles the HTTP <code>POST</code> method.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        int ses_id = Integer.parseInt(request.getParameter("sesid"));
+        String[] stuid = request.getParameterValues("stuid");
+        Session ses = new Session();
+        ses.setSession_id(ses_id);
+        
+        for (String student_id : stuid) {
+            Status st = new Status();
+            st.setSession(ses);
+            st.setComment(request.getParameter("comment"));
+            st.setStatus(request.getParameter("status"+ student_id).equals("present"));
+            Student s = new Student();
+            s.setStudent_id(Integer.parseInt(student_id));
+            st.setStudent(s);
+            ses.getStatus().add(st);
+        }
+        System.out.println(ses_id);
+        SessionDB sdb = new SessionDB();
+        sdb.setAtt(ses);
+        String alert = "Save successfully at";
+        request.setAttribute("alert", alert);
+        request.getRequestDispatcher("Attendance.jsp").forward(request, response);
+
     }
-
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
