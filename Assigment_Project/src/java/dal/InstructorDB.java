@@ -28,7 +28,7 @@ public class InstructorDB extends DBcontext<Instructor> {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Instructor i = new Instructor();
-                i.setInstructor_id(rs.getString("instructor_id"));
+                i.setInstructor_id(rs.getInt("instructor_id"));
                 i.setInstructor_name(rs.getString("instructor_name"));
                 return i;
             }

@@ -9,31 +9,14 @@ package model;
  * @author FPTSHOP
  */
 public class Subject {
-    String subject_id, subject_name;
-    Instructor instructor;
-    Course course;
-
-    public Instructor getInstructor() {
-        return instructor;
-    }
-
-    public void setInstructor(Instructor instructor) {
-        this.instructor = instructor;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
+    int subject_id;
+    String subject_name;
     
-    public String getSubject_id() {
+    public int getSubject_id() {
         return subject_id;
     }
 
-    public void setSubject_id(String subject_id) {
+    public void setSubject_id(int subject_id) {
         this.subject_id = subject_id;
     }
 

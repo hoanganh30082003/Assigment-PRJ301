@@ -26,9 +26,9 @@ public class SlotDB extends DBcontext<Slot> {
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
                 Slot s = new Slot();
-                s.setSlot_id(rs.getString(1));
-                s.setStarttime(rs.getTime(2));
-                s.setEndtime(rs.getTime(3));
+                s.setSlot_id(rs.getInt(1));
+                s.setStart_time(rs.getTime(2));
+                s.setEnd_time(rs.getTime(3));
                 list.add(s);
             }
         } catch (SQLException ex) {

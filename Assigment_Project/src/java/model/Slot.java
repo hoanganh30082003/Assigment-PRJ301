@@ -11,31 +11,31 @@ import java.sql.Time;
  * @author FPTSHOP
  */
 public class Slot implements IBaseModel{
-    String slot_id;
-    Time starttime, endtime;
+    int slot_id;
+    Time start_time, end_time;
 
-    public String getSlot_id() {
+    public int getSlot_id() {
         return slot_id;
     }
 
-    public void setSlot_id(String slot_id) {
+    public void setSlot_id(int slot_id) {
         this.slot_id = slot_id;
     }
 
-    public Time getStarttime() {
-        return starttime;
+    public Time getStart_time() {
+        return start_time;
     }
 
-    public void setStarttime(Time starttime) {
-        this.starttime = starttime;
+    public void setStart_time(Time start_time) {
+        this.start_time = start_time;
     }
 
-    public Time getEndtime() {
-        return endtime;
+    public Time getEnd_time() {
+        return end_time;
     }
 
-    public void setEndtime(Time endtime) {
-        this.endtime = endtime;
+    public void setEnd_time(Time end_time) {
+        this.end_time = end_time;
     }
     
 }

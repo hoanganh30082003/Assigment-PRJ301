@@ -5,7 +5,7 @@
 package Controller;
 
 import dal.SlotDB;
-import dal.TtOfInstructorDB;
+import dal.SessionDB;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Lecture;
+import model.Session;
 import model.Slot;
 import util.DateUtils;
 
@@ -43,7 +43,7 @@ public class TtOfInstructor extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        String id = request.getParameter("id");
+        int id = Integer.parseInt(request.getParameter("id"));
         String from = request.getParameter("from");
         String to = request.getParameter("to");
         ArrayList<Date> dates = new ArrayList<>();
@@ -57,17 +57,21 @@ public class TtOfInstructor extends HttpServlet {
         Date fromDate = dates.get(0);
         Date toDate = dates.get(dates.size() - 1);
 
-        TtOfInstructorDB tdb = new TtOfInstructorDB();
-        List<Lecture> list = tdb.getLecture(id, fromDate, toDate);
+        SessionDB tdb = new SessionDB();
+        List<Session> list = tdb.getLecture(id, fromDate, toDate);
 
         SlotDB sl = new SlotDB();
         List<Slot> slots = sl.getSlot();
         
-        SimpleDateFormat f = new SimpleDateFormat("dd-MM");
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM");
         ArrayList<String> dateFormat = new ArrayList<>();
         for (Date date : dates) {
             String formattedDate = f.format(date);
             dateFormat.add(formattedDate);
+        }
+        for (Session session : list) {
+            System.out.println(session.getSession_id());
+            System.out.println(session.getGroup_id());
         }
         System.out.println(list);
         System.out.println(dates);
@@ -75,7 +79,8 @@ public class TtOfInstructor extends HttpServlet {
         System.out.println(toDate);
         System.out.println("id:"+id);
         request.setAttribute("slots", slots);
-        request.setAttribute("dates", dateFormat);
+        request.setAttribute("dates", dates);
+        request.setAttribute("dateFormat", dateFormat);
         request.setAttribute("from", fromDate);
         request.setAttribute("to", toDate);
         request.setAttribute("session", list);

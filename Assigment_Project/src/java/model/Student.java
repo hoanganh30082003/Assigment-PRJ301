@@ -9,14 +9,14 @@ package model;
  * @author FPTSHOP
  */
 public class Student {
-    String student_id;
+    int student_id;
     String student_name;
 
-    public String getStudent_id() {
+    public int getStudent_id() {
         return student_id;
     }
 
-    public void setStudent_id(String student_id) {
+    public void setStudent_id(int student_id) {
         this.student_id = student_id;
     }
 

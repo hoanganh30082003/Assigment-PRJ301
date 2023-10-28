@@ -56,7 +56,7 @@
                     <tr class="inline">
                         <td ><select class="btn" name="campus">
                                 <option selected="selected">Select Campus</option>
-                                <option value="1">FU-Hòa Lạc</option>
+                                <option value="1">FU-Hà Nội</option>
                                 <option value="2">FU-Hồ Chí Minh</option>
                                 <option value="3">FU-Đà Nẵng</option>
                                 <option value="4">FU-Cần Thơ</option>

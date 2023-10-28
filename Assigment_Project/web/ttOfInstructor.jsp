@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap.css"/>
         <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="Css/TtofLecturer.css"/>
-        
+
     </head>
     <body style="background-color: #414045">
         <div class="row header">
@@ -39,86 +39,112 @@
         </div>
         <div class="row information">
             <div class="col-md-12">
-                
-                    <b>View Schedule</b>
-                    <c:set scope="request" var="d" value="${data}"/>
-                    <label>Campus: ${d.getCampus().getCampus_name()}</label>
-                    <label>Lecturer: ${d.getInstructor().getInstructor_name()}</label>
-                    <center>
 
-                        <form  action="schedule"method="get">
-                            <label>From</label>
-                            <input type="date" class="btn" name="from" value="${requestScope.from}">
-                            <label>To</label>
-                            <input type="date"  class="btn"  name="to" value="${requestScope.to}">
-                            <input type="hidden" name="id" value="${d.getInstructor().getInstructor_id()}">
-                            <input type="submit" value="View" class="btn">
-                        </form>
-                    </center>
-                    <c:set scope="request" value="${session}" var="s"/>
-                    <table class="tt">
-                        <thead>
+                <b>View Schedule</b>
+                <c:set scope="request" var="d" value="${data}"/>
+                <label>Campus: ${d.getCampus().getCampus_name()}</label>
+                <label>Lecturer: ${d.getInstructor().getInstructor_name()}</label>
+
+                <p>
+                    <b>Note</b>: These activities do not include extra-curriculum activities, such as
+                    club activities ...
+                </p>
+                <p>
+                    <b>Chú thích</b> : Các hoạt động trong bảng dưới không bao gồm hoạt động ngoại khóa,
+                    ví dụ như hoạt động câu lạc bộ ...
+                </p>
+                <div>
+                    <p>
+                        Các phòng bắt đầu bằng AL thuộc tòa nhà Alpha. VD: AL...<br>
+                        Các phòng bắt đầu bằng BE thuộc tòa nhà Beta. VD: BE,..<br>
+                        Các phòng bắt đầu bằng G thuộc tòa nhà Gamma. VD: G201,...<br>
+                        Các phòng tập bằng đầu bằng R thuộc khu vực sân tập Vovinam.<br>
+                        Các phòng bắt đầu bằng DE thuộc tòa nhà Delta. VD: DE,..<br>
+                        Little UK (LUK) thuộc tầng 5 tòa nhà Delta
+                    </p>
+                </div>
+                <center>
+
+                    <form  action="schedule"method="get">
+                        <label>From</label>
+                        <input type="date" class="btn" name="from" value="${requestScope.from}">
+                        <label>To</label>
+                        <input type="date"  class="btn"  name="to" value="${requestScope.to}">
+                        <input type="hidden" name="id" value="${d.getInstructor().getInstructor_id()}">
+                        <input type="submit" value="View" class="btn">
+                    </form>
+                </center>
+
+                <table class="tt">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <c:forEach items="${requestScope.dateFormat}" var="df">
+                                <td>${df}</td>
+                            </c:forEach>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${slots}" var="l">
                             <tr>
-                                <c:forEach items="${requestScope.dates}" var="d">
-                                    <td></td>
-                                    <td>${d}</td>
+                                <td>${l.slot_id}</td>
+                                <c:forEach items="${dates}" var="d">
+                                    <td>
+                                        <c:set var="sessionFound" value="false" />
+                                        <c:forEach items="${session}" var="s">
+                                            <c:if test="${s.date eq d and s.slot.slot_id eq l.slot_id}">
+                                                <a href="attendance?id=${s.session_id}">
+                                                    ${s.subject.subject_name}-${s.group_id}<br>
+                                                    ${s.room_id}<br>(${s.slot.start_time}-${s.slot.end_time})
+                                                </a>
+                                                <c:set var="sessionFound" value="true" />
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${not sessionFound}">
+                                            -
+                                        </c:if>
+                                    </td>
                                 </c:forEach>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${requestScope.slots}" var="l">
+                        </c:forEach>
+                    </tbody>
+                </table>
+                <p>
+                    <br><b>More note / Chú thích thêm:</b>
+                </p>
+                <div>
+                    <ul>
+                        <li>
+                            (<font color="green">attended</font>): ${d.getInstructor().getInstructor_name()} đã tham gia hoạt động này</li>
+                        <li>
+                            (<font color="red">absent</font>): ${d.getInstructor().getInstructor_name()} đã vắng mặt buổi này</li> 
+                        <li>(-): no data was given / chưa có dữ liệu</li> 
+                    </ul>
+                </div>
+                <p>
+                </p>
+
+
+                <tr>
+                    <td>                                  
+                <tr>
+                    <td>                     
+                        <br>
+                        <b>Mọi góp ý, thắc mắc xin liên hệ:</b>
+                        <b>Phòng dịch vụ sinh viên</b><br>
+                        <table >
+                            <tbody>
                                 <tr>
-                                    <td>${l.slot_id}</td>
-                                    <c:forEach items="${requestScope.dates}" var="d" varStatus="loop">
-                                        <c:forEach items="${requestScope.session}" var="s">
-                                        <td>
-                                            <c:if test="${s.date eq d and s.getSlot().getSlot_id eq l.slot_id}">
-                                                <a href="#">${s.subject}-${s.room}</a>
-                                            </c:if>
-                                            
-                                        </td>
-                                        </c:forEach>
-                                    </c:forEach>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                    <p>
-                        <br><b>More note / Chú thích thêm:</b>
-                    </p>
-                    <div>
-                        <ul>
-                            <li>
-                                (<font color="green">attended</font>): ${d.getInstructor().getInstructor_name()} đã tham gia hoạt động này</li>
-                            <li>
-                                (<font color="red">absent</font>): ${d.getInstructor().getInstructor_name()} đã vắng mặt buổi này</li> 
-                            <li>(-): no data was given / chưa có dữ liệu</li> 
-                        </ul>
-                    </div>
-                    <p>
-                    </p>
-
-
-                    <tr>
-                        <td>                                  
-                    <tr>
-                        <td>                     
-                            <br>
-                            <b>Mọi góp ý, thắc mắc xin liên hệ:</b>
-                            <b>Phòng dịch vụ sinh viên</b><br>
-                            <table >
-                                <tbody>
-                                    <tr>
-                                        <th> Email:</th>
-                                        <th><a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a></th>
-                                    </tr>                                           
-                                    <tr>
-                                        <td> Điện thoại:</td>
-                                        <td><span>(024)7308.13.13 </span></td>
-                                    </tr>                                                
-                                </tbody>
-                            </table>                                        
-                            <br>
+                                    <th> Email:</th>
+                                    <th><a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a></th>
+                                </tr>                                           
+                                <tr>
+                                    <td> Điện thoại:</td>
+                                    <td><span>(024)7308.13.13 </span></td>
+                                </tr>                                                
+                            </tbody>
+                        </table>                                        
+                        <br>
             </div>
         </div>
 

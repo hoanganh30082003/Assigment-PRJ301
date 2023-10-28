@@ -21,13 +21,6 @@ public class AccountDBContext extends DBcontext<Account> {
 
     public Account get(Account model) {
         try {
-//            String sql = "SELECT *\n"
-//                    + "  FROM [Account]\n"
-//                    + "  where username = ? and password = ? and campus_id = ? ";
-//            PreparedStatement stm = connection.prepareStatement(sql);
-//            stm.setString(1, model.getUsername());
-//            stm.setString(2, model.getPassword());
-//            stm.setString(3, model.getCampus().getCampus_id());
             String sql = "select a.username ,a.password ,a.instructor_id,i.instructor_name,a.campus_id, c.campus_name\n"
                     + "from Account a\n"
                     + "inner join Instructor i on a.instructor_id = i.instructor_id\n"
@@ -47,7 +40,7 @@ public class AccountDBContext extends DBcontext<Account> {
                 c.setCampus_name(rs.getString("campus_name"));
                 acc.setCampus(c);
                 Instructor i = new Instructor();
-                i.setInstructor_id(rs.getString("instructor_id"));
+                i.setInstructor_id(rs.getInt("instructor_id"));
                 i.setInstructor_name(rs.getString("instructor_name"));
                 acc.setInstructor(i);
                 return acc;
