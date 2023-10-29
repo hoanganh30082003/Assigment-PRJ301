@@ -48,7 +48,7 @@ public class TtOfInstructor extends HttpServlet {
         String to = request.getParameter("to");
         ArrayList<Date> dates = new ArrayList<>();
         
-        if (from == null || to == null) {
+        if (from == null && to == null) {
             dates = (ArrayList<Date>) DateUtils.getDatesOfCurrentWeek();
         } else {
             dates = (ArrayList<Date>) DateUtils.getSQLDatesBetween(from, to);

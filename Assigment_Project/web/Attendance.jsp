@@ -42,7 +42,6 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>NO</th>
                             <th>CODE</th>
                             <th>NAME</th>
                             <th>IMAGE</th>
@@ -54,7 +53,6 @@
                         <c:forEach items="${requestScope.status}" var="s">
                             <tr>
                         <input type="hidden" name="stuid" value="${s.student.student_id}">
-                                <td></td>
                                 <td>${s.student.student_id}</td>
                                 <td>${s.student.student_name}</td>
                                 <td><img src="src" alt="image"/></td>
@@ -70,7 +68,7 @@
                                            </c:if>
                                            name="status${s.student.student_id}" value="present" /> present
                                 </td>
-                                <td><input type="text" value="${s.comment}" name="comment"></td>
+                                <td><input type="text" value="${s.comment}" name="comment${s.student.student_id}"></td>
                             </tr>
                         </c:forEach>
                     </tbody>
