@@ -42,6 +42,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>NO</th>
                             <th>CODE</th>
                             <th>NAME</th>
                             <th>IMAGE</th>
@@ -50,27 +51,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${requestScope.status}" var="s">
+                        <c:forEach items="${requestScope.status}" var="s" varStatus="loop">
                             <tr>
-                        <input type="hidden" name="stuid" value="${s.student.student_id}">
-                                <td>${s.student.student_id}</td>
-                                <td>${s.student.student_name}</td>
-                                <td><img src="src" alt="image"/></td>
-                                <td>
-                                    <input type="radio"  
-                                           <c:if test="${!s.status}">
-                                               checked="checked" 
-                                           </c:if>
-                                           name="status${s.student.student_id}" value="absent" /> absent
-                                    <input type="radio" 
-                                           <c:if test="${s.status}">
-                                               checked="checked" 
-                                           </c:if>
-                                           name="status${s.student.student_id}" value="present" /> present
-                                </td>
-                                <td><input type="text" value="${s.comment}" name="comment${s.student.student_id}"></td>
-                            </tr>
-                        </c:forEach>
+                        <input type="hidden" name="stuid" value="${s.student.student_id}" >
+                        <td>${loop.index + 1}</td> 
+                        <td>St${s.student.student_id}</td>
+                        <td>${s.student.student_name}</td>
+                        <td><img src="src" alt="image"/></td>
+                        <td>
+                            <input type="radio"  
+                                   <c:if test="${!s.status}">
+                                       checked="checked" 
+                                   </c:if>
+                                   name="status${s.student.student_id}" value="absent" /> absent
+                            <input type="radio" 
+                                   <c:if test="${s.status}">
+                                       checked="checked" 
+                                   </c:if>
+                                   name="status${s.student.student_id}" value="present" /> present
+                        </td>
+                        <td><input type="text" value="${s.comment}" name="comment${s.student.student_id}"></td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
                 <input type="hidden" name="sesid" value="${requestScope.status[0].session.session_id}">

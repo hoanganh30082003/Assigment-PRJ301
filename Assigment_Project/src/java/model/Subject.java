@@ -8,15 +8,15 @@ package model;
  *
  * @author FPTSHOP
  */
-public class Subject {
-    int subject_id;
+public class Subject implements IBaseModel{
+    String subject_id;
     String subject_name;
     
-    public int getSubject_id() {
+    public String getSubject_id() {
         return subject_id;
     }
 
-    public void setSubject_id(int subject_id) {
+    public void setSubject_id(String subject_id) {
         this.subject_id = subject_id;
     }
 

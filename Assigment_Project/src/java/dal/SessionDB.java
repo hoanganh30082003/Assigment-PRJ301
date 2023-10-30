@@ -25,7 +25,7 @@ public class SessionDB extends DBcontext<Session> {
 
     public List<Session> getSession(int instructor_id, Date from, Date to) {
         List<Session> list = new ArrayList<>();
-        String sql = "select s.session_id,s.subject_id,s.room_id,s.group_id,sl.slot_id,sl.start_time,sl.end_time,su.subject_name,s.date \n"
+        String sql = "select s.isAtt,s.session_id,s.subject_id,s.room_id,s.group_id,sl.slot_id,sl.start_time,sl.end_time,su.subject_name,s.date \n"
                 + "from Session s \n"
                 + "inner join [Group] g on s.group_id = g.group_id\n"
                 + "inner join Slot sl on s.slot_id = sl.slot_id\n"
@@ -42,6 +42,7 @@ public class SessionDB extends DBcontext<Session> {
                 Session s = new Session();
                 s.setSession_id(rs.getInt("session_id"));
                 s.setRoom_id(rs.getString("room_id"));
+                s.setIsAtt(rs.getBoolean("isAtt"));
 
                 s.setDate(rs.getDate("date"));
                 s.setGroup_id(rs.getString("group_id"));
@@ -53,7 +54,7 @@ public class SessionDB extends DBcontext<Session> {
                 s.setSlot(sl);
 
                 Subject su = new Subject();
-                su.setSubject_id(rs.getInt("subject_id"));
+                su.setSubject_id(rs.getString("subject_id"));
                 su.setSubject_name(rs.getString("subject_name"));
                 s.setSubject(su);
                 list.add(s);

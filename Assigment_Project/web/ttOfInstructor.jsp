@@ -41,9 +41,9 @@
             <div class="col-md-12">
 
                 <b>View Schedule</b>
-                <c:set scope="request" var="d" value="${data}"/>
-                <label>Campus: ${d.getCampus().getCampus_name()}</label>
-                <label>Lecturer: ${d.getInstructor().getInstructor_name()}</label>
+
+                <label>Campus: ${sessionScope.acc.campus.campus_name}</label>
+                <label>Lecturer:${sessionScope.acc.instructor.instructor_name}</label>
 
                 <p>
                     <b>Note</b>: These activities do not include extra-curriculum activities, such as
@@ -70,7 +70,6 @@
                         <input type="date" class="btn" name="from" value="${requestScope.from}">
                         <label>To</label>
                         <input type="date"  class="btn"  name="to" value="${requestScope.to}">
-                        <input type="hidden" name="id" value="${d.getInstructor().getInstructor_id()}">
                         <input type="submit" value="View" class="btn">
                     </form>
                 </center>
@@ -87,15 +86,21 @@
                     <tbody>
                         <c:forEach items="${slots}" var="l">
                             <tr>
-                                <td>${l.slot_id}</td>
+                                <td>Slot ${l.slot_id}</td>
                                 <c:forEach items="${dates}" var="d">
                                     <td>
                                         <c:set var="sessionFound" value="false" />
                                         <c:forEach items="${session}" var="s">
                                             <c:if test="${s.date eq d and s.slot.slot_id eq l.slot_id}">
                                                 <a href="attendance?id=${s.session_id}">
-                                                    ${s.subject.subject_name}-${s.group_id}<br>
+                                                    ${s.subject.subject_id}-${s.group_id}<br>
                                                     ${s.room_id}<br>(${s.slot.start_time}-${s.slot.end_time})
+                                                    <c:if test="${s.isAtt}">
+                                                        <p style="color: green">(attended)</p>
+                                                    </c:if>
+                                                    <c:if test="${!s.isAtt}">
+                                                        <p style="color: red">(not yet)</p>
+                                                    </c:if>
                                                 </a>
                                                 <c:set var="sessionFound" value="true" />
                                             </c:if>
@@ -115,9 +120,9 @@
                 <div>
                     <ul>
                         <li>
-                            (<font color="green">attended</font>): ${d.getInstructor().getInstructor_name()} đã tham gia hoạt động này</li>
+                            (<font color="green">attended</font>): ${sessionScope.acc.instructor.instructor_name} đã tham gia hoạt động này</li>
                         <li>
-                            (<font color="red">absent</font>): ${d.getInstructor().getInstructor_name()} đã vắng mặt buổi này</li> 
+                            (<font color="red">absent</font>): ${sessionScope.acc.instructor.instructor_name} đã vắng mặt buổi này</li> 
                         <li>(-): no data was given / chưa có dữ liệu</li> 
                     </ul>
                 </div>

@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Account;
 import model.Session;
 import model.Slot;
 import util.DateUtils;
@@ -43,11 +45,12 @@ public class TtOfInstructor extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        int id = Integer.parseInt(request.getParameter("id"));
+        HttpSession session = request.getSession();
+        Account loggedAcc = (Account) session.getAttribute("acc");
         String from = request.getParameter("from");
         String to = request.getParameter("to");
         ArrayList<Date> dates = new ArrayList<>();
-        
+
         if (from == null && to == null) {
             dates = (ArrayList<Date>) DateUtils.getDatesOfCurrentWeek();
         } else {
@@ -56,31 +59,29 @@ public class TtOfInstructor extends HttpServlet {
 
         Date fromDate = dates.get(0);
         Date toDate = dates.get(dates.size() - 1);
-
-        SessionDB tdb = new SessionDB();
-        List<Session> list = tdb.getSession(id, fromDate, toDate);
-
         SlotDB sl = new SlotDB();
         List<Slot> slots = sl.getSlot();
-        
+
         SimpleDateFormat f = new SimpleDateFormat("dd/MM");
         ArrayList<String> dateFormat = new ArrayList<>();
         for (Date date : dates) {
             String formattedDate = f.format(date);
             dateFormat.add(formattedDate);
         }
-        for (Session session : list) {
-            System.out.println(session.getSession_id());
-            System.out.println(session.getGroup_id());
+        if (loggedAcc != null) {
+            int id = loggedAcc.getInstructor().getInstructor_id();
+            System.out.println(id);
+            SessionDB tdb = new SessionDB();
+            List<Session> list = tdb.getSession(id, fromDate, toDate);
+            request.setAttribute("slots", slots);
+            request.setAttribute("dates", dates);
+            request.setAttribute("dateFormat", dateFormat);
+            request.setAttribute("from", fromDate);
+            request.setAttribute("to", toDate);
+            request.setAttribute("session", list);
+            request.getRequestDispatcher("ttOfInstructor.jsp").forward(request, response);
         }
-        
-        request.setAttribute("slots", slots);
-        request.setAttribute("dates", dates);
-        request.setAttribute("dateFormat", dateFormat);
-        request.setAttribute("from", fromDate);
-        request.setAttribute("to", toDate);
-        request.setAttribute("session", list);
-        request.getRequestDispatcher("ttOfInstructor.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
