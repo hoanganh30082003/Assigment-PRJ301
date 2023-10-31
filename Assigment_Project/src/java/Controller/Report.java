@@ -5,6 +5,8 @@
 
 package Controller;
 
+import dal.GroupDB;
+import dal.SubjectDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +14,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import model.Group;
+import model.Subject;
 
 /**
  *
@@ -55,7 +61,23 @@ public class Report extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        String instructorId = (String) session.getAttribute("${sessionScope.acc.instructor.instructor_name}");
+        int id = Integer.parseInt(instructorId);
+        System.out.println(id);
+        String sid = request.getParameter("sid");
+        SubjectDB sdb = new SubjectDB();
+        ArrayList<Subject> list = sdb.getSubject(id);
+        
+        GroupDB gdb = new GroupDB();
+        ArrayList<Group> groups = gdb.getGroup(sid, id);
+        for (Group group : groups) {
+            System.out.println(group.getGroup_id());
+        }
+        
+        request.setAttribute("groups", groups);
+        request.setAttribute("subjects", list);
+        request.getRequestDispatcher("Report.jsp").forward(request, response);
     } 
 
     /** 

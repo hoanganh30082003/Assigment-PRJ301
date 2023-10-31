@@ -20,21 +20,24 @@ public class SubjectDB extends DBcontext<Subject> {
 
     public ArrayList<Subject> getSubject(int instructor_id) {
         ArrayList<Subject> subjects = new ArrayList<>();
-        String sql = "select ss.subject_id,ss.group_id, su.subject_name\n"
-                + "from session ss \n"
-                + "inner join Subject su on ss.subject_id = su.subject_id\n"
-                + "where ss.instructor_id = ?";
+        String sql = "SELECT i.Subject_id,s.subject_name\n"
+                + "  FROM [dbo].[Instructor Subject] i\n"
+                + "  inner join Subject s on i.Subject_id = s.subject_id\n"
+                + "  where instructor_id = ?";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, instructor_id);
             ResultSet rs = stm.executeQuery();
-            while (rs.next()) {                
-                
+            while (rs.next()) {
+                Subject s = new Subject();
+                s.setSubject_id(rs.getString("subject_id"));
+                s.setSubject_name(rs.getString("subject_name"));
+                subjects.add(s);
             }
         } catch (SQLException ex) {
             Logger.getLogger(SubjectDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return subjects; 
+
+        return subjects;
     }
 }

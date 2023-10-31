@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author FPTSHOP
@@ -11,6 +13,16 @@ package model;
 public class Subject implements IBaseModel{
     String subject_id;
     String subject_name;
+    ArrayList<Group> group = new ArrayList<>();
+
+    public ArrayList<Group> getGroup() {
+        return group;
+    }
+
+    public void setGroup(ArrayList<Group> group) {
+        this.group = group;
+    }
+    
     
     public String getSubject_id() {
         return subject_id;

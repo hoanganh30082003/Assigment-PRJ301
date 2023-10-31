@@ -114,6 +114,7 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                        <a href="report">see report</a>
                 <p>
                     <br><b>More note / Chú thích thêm:</b>
                 </p>
