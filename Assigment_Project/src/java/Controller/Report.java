@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package Controller;
 
+import com.google.gson.Gson;
 import dal.GroupDB;
 import dal.SubjectDB;
 import java.io.IOException;
@@ -23,36 +23,39 @@ import model.Subject;
  *
  * @author FPTSHOP
  */
-@WebServlet(name="Report", urlPatterns={"/report"})
+@WebServlet(name = "Report", urlPatterns = {"/report"})
 public class Report extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Report</title>");  
+            out.println("<title>Servlet Report</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Report at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet Report at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -60,28 +63,31 @@ public class Report extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String instructorId = (String) session.getAttribute("${sessionScope.acc.instructor.instructor_name}");
-        int id = Integer.parseInt(instructorId);
-        System.out.println(id);
+        int id = Integer.parseInt(request.getParameter("id"));
+        System.out.println("id: " + id);
         String sid = request.getParameter("sid");
         SubjectDB sdb = new SubjectDB();
         ArrayList<Subject> list = sdb.getSubject(id);
-        
+
         GroupDB gdb = new GroupDB();
         ArrayList<Group> groups = gdb.getGroup(sid, id);
         for (Group group : groups) {
             System.out.println(group.getGroup_id());
         }
-        
-        request.setAttribute("groups", groups);
+        Gson gson = new Gson();
+        String jsonData = gson.toJson(groups);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        request.setAttribute("groups", jsonData);
         request.setAttribute("subjects", list);
         request.getRequestDispatcher("Report.jsp").forward(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -89,12 +95,13 @@ public class Report extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

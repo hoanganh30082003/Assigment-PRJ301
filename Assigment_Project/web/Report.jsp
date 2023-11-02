@@ -11,36 +11,37 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            function loadGroup(subjectId) {
-                $.ajax({
-                    url: "/report?sid=" + subjectId, // Đường dẫn đến Servlet xử lý yêu cầu
-                    method: "GET",
-                    success: function (data) {
-                        // Tìm phần tử cần hiển thị thông tin group
-                        var groupInfoElement = document.getElementById("groupInfo_" + subjectId);
-                        if (groupInfoElement) {
-                            groupInfoElement.innerHTML = data;
-                        }
-                    },
-                    error: function () {
-                        alert("Không thể tải thông tin group.");
-                    }
-                });
+        // Parse the JSON data from JSP
+        var groupData = <c:out value="${jsonData}" />;
+
+        // Function to display the group information
+        function displayGroupInfo() {
+            var table = "<table border='1'><tr><th>Group ID</th><th>Group Name</th></tr>";
+
+            // Loop through the groupData array and populate the table
+            for (var i = 0; i < groupData.length; i++) {
+                var group = groupData[i];
+                table += "<tr><td>" + group.group_id + "</td><td>" + group.group_name + "</td></tr>";
             }
-        </script>
+
+            table += "</table>";
+            document.getElementById("groupInfo").innerHTML = table;
+        }
+    </script>
     </head>
     <body>
         <table >
             <c:forEach items="${requestScope.subjects}" var="s">
                 <tr>
 
-                    <td><a href="javascript:void(0);" onclick="loadGroup(${s.subject_id});">${s.subject_id}-${s.subject_name}</a></td>
+                    <td><a href="javascript:void(0)" onclick="loadGroup(${s.subject_id})">${s.subject_id}-${s.subject_name}</a></td>
 
                 </tr>
             </c:forEach>
 
         </table>
-
+<div id="groupInfo_${s.subject_id}"></div>
     </body>
 </html>
