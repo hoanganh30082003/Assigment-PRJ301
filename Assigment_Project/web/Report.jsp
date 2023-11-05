@@ -11,37 +11,43 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-        // Parse the JSON data from JSP
-        var groupData = <c:out value="${jsonData}" />;
-
-        // Function to display the group information
-        function displayGroupInfo() {
-            var table = "<table border='1'><tr><th>Group ID</th><th>Group Name</th></tr>";
-
-            // Loop through the groupData array and populate the table
-            for (var i = 0; i < groupData.length; i++) {
-                var group = groupData[i];
-                table += "<tr><td>" + group.group_id + "</td><td>" + group.group_name + "</td></tr>";
-            }
-
-            table += "</table>";
-            document.getElementById("groupInfo").innerHTML = table;
-        }
-    </script>
     </head>
-    <body>
-        <table >
-            <c:forEach items="${requestScope.subjects}" var="s">
-                <tr>
+    <body>        
+        <nav>
+            <ul>
+                <c:forEach items="${sessionScope.subjects}" var="subject">
+                    <li>
+                        <a href="group?id=${subject.subject_id}">
+                            ${subject.subject_name}
+                        </a>
+                    </li>
+                </c:forEach>
+            </ul>
+        </nav>
 
-                    <td><a href="javascript:void(0)" onclick="loadGroup(${s.subject_id})">${s.subject_id}-${s.subject_name}</a></td>
-
-                </tr>
+        <c:forEach items="${sessionScope.groups}" var="g">
+            <c:forEach items="${sessionScope.subjects}" var="subject">
+                <c:if test="${g.subject_id eq subject.subject_id}">
+                    <a href="check?gid=${g.group_id}&sid=${subject.subject_id}">${g.group_id}</a>
+                </c:if>
             </c:forEach>
-
+        </c:forEach>
+        <table border="1">
+            <tbody>
+                <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>status</td>
+                    <td>session</td>
+                </tr>
+                <c:forEach items="${requestScope.students}" var="ss">
+                    <tr>
+                        <td>${ss.student_id}</td>
+                        <td>${ss.student_name}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
         </table>
-<div id="groupInfo_${s.subject_id}"></div>
+
     </body>
 </html>

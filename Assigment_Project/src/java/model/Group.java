@@ -10,6 +10,27 @@ package model;
  */
 public class Group implements IBaseModel{
     String group_id;
+    String subject_id;
+    Status status;
+
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    
+    public String getSubject_id() {
+        return subject_id;
+    }
+
+    public void setSubject_id(String subject_id) {
+        this.subject_id = subject_id;
+    }
+    
     public String getGroup_id() {
         return group_id;
     }

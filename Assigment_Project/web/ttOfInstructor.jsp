@@ -114,7 +114,7 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                        <a href="report?id=${sessionScope.acc.instructor.instructor_id}">see report</a>
+                        <a href="report">see report</a>
                 <p>
                     <br><b>More note / Chú thích thêm:</b>
                 </p>

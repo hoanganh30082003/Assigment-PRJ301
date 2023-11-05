@@ -8,7 +8,7 @@ package model;
  *
  * @author FPTSHOP
  */
-public class Student {
+public class Student implements IBaseModel{
     int student_id;
     String student_name;
 

@@ -68,9 +68,7 @@ public class TtOfInstructor extends HttpServlet {
             String formattedDate = f.format(date);
             dateFormat.add(formattedDate);
         }
-        if (loggedAcc != null) {
             int id = loggedAcc.getInstructor().getInstructor_id();
-            System.out.println(id);
             SessionDB tdb = new SessionDB();
             List<Session> list = tdb.getSession(id, fromDate, toDate);
             request.setAttribute("slots", slots);
@@ -80,7 +78,7 @@ public class TtOfInstructor extends HttpServlet {
             request.setAttribute("to", toDate);
             request.setAttribute("session", list);
             request.getRequestDispatcher("ttOfInstructor.jsp").forward(request, response);
-        }
+        
 
     }
 
