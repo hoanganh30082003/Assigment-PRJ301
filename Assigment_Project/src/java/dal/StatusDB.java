@@ -55,4 +55,33 @@ public class StatusDB extends DBcontext<Status> {
 
         return list;
     }
+
+    public ArrayList<Status> getStatus(String subject_id, String group_id) {
+        ArrayList<Status> statuses = new ArrayList<>();
+        String sql = "select sn.session_id,student_id,status\n"
+                + "from Session sn\n"
+                + "inner join Status ss on sn.session_id = ss.session_id \n"
+                + "where subject_id = ? and group_id = ?";
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, subject_id);
+            stm.setString(2, group_id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {                
+                Status status = new Status();
+                Session session = new Session();
+                session.setSession_id(rs.getInt("session_id"));
+                status.setSession(session);
+                status.setStatus(rs.getBoolean("status"));
+                
+                Student student = new Student();
+                student.setStudent_id(rs.getInt("student_id"));
+                status.setStudent(student);
+                statuses.add(status);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StatusDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return statuses;
+    }
 }

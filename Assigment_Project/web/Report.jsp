@@ -10,9 +10,32 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Attendance Report</title>
+        <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap-grid.css"/>
+        <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap.css"/>
+        <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="Css/TtofLecturer.css"/>
     </head>
-    <body>        
+    <body style="background-color: #414045"> 
+        <div class="row header">
+            <div class="col-md">
+                <h1>FPT University Academic Portal</h1>
+            </div>
+            <div class="col-md-4">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="2"> <h5 class="mid-title">FAP mobile app (myFAP) is ready at</h5></td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://apps.apple.com/app/id1527723314">
+                                    <img src="https://fap.fpt.edu.vn/images/app-store.png" style="width: 120px; height: 40px" alt="apple store"></a></td>
+                            <td><a href="https://play.google.com/store/apps/details?id=com.fuct">
+                                    <img src="https://fap.fpt.edu.vn/images/play-store.png" style="width: 120px; height: 40px" alt="google store"></a></td>
+                        </tr>
+                    </tbody></table>
+            </div>
+        </div>
         <nav>
             <ul>
                 <c:forEach items="${sessionScope.subjects}" var="subject">
@@ -32,22 +55,72 @@
                 </c:if>
             </c:forEach>
         </c:forEach>
-        <table border="1">
-            <tbody>
-                <tr>
-                    <td>ID</td>
-                    <td>Name</td>
-                    <td>status</td>
-                    <td>session</td>
-                </tr>
-                <c:forEach items="${requestScope.students}" var="ss">
-                    <tr>
-                        <td>${ss.student_id}</td>
-                        <td>${ss.student_name}</td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+        <c:if test="${ not empty requestScope.students}">
+            <table class="tt">
+                <tbody>
 
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                            <c:forEach items="${requestScope.sessions}" var="ss">
+                            <th>${ss.session_name}</th>
+                            </c:forEach>
+                        <th>Total Absents</th>
+                        <th>Status</th>
+                    </tr>
+                    <c:forEach items="${requestScope.students}" var="st">
+                        <tr>
+                            <td>${st.student_id}</td>
+                            <td>${st.student_name}</td>
+                            <c:forEach items="${requestScope.sessions}" var="ss">
+                                <c:set var="statusFound" value="false" />
+                                <td>
+                                    <c:forEach items="${requestScope.statuses}" var="s">
+                                        <c:if test="${ss.session_id eq s.session.session_id and s.student.student_id eq st.student_id}">
+                                            <c:if test="${s.status}">
+                                                <p style="color: green">P</p>
+                                            </c:if>
+                                            <c:if test="${!s.status}">
+                                                <p style="color: red">A</p>
+                                            </c:if>
+                                            <c:set var="statusFound" value="true" />
+                                        </c:if>
+                                    </c:forEach>
+                                    <c:if test="${not statusFound}">
+                                        -
+                                    </c:if>
+                                </td>
+                            </c:forEach>
+                                <c:set var="absentFound" value="false" />
+                            <td>
+                                
+                                <c:forEach var="entry" items="${requestScope.studentAbsencesMap}">
+                                    <c:if test="${entry.key eq st.student_id}">
+                                        ${entry.value}
+                                        <c:set var="absentFound" value="true" />
+                                    </c:if>
+                                </c:forEach>
+                                <c:if test="${not absentFound}">
+                                    0
+                                </c:if>
+                            </td>
+                            <td>
+                                <c:forEach items="${requestScope.studentAttendancePercentageMap}" var="satt">
+                                    ${satt.value}
+                                </c:forEach>
+                            </td>
+                    </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </c:if>
+        <footer>
+            <p>
+                © Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>&nbsp;|&nbsp;
+                <a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>&nbsp;|&nbsp; 
+                <a href="http://library.fpt.edu.vn" target="_blank">library</a>&nbsp;|&nbsp; 
+                <a href="http://library.books24x7.com" target="_blank">books24x7</a>
+            </p>
+        </footer>
     </body>
 </html>

@@ -23,6 +23,15 @@ public class Session implements IBaseModel {
     boolean isAtt;
     Date submit;
     ArrayList<Status> status = new ArrayList<>();
+    String session_name;
+
+    public String getSession_name() {
+        return session_name;
+    }
+
+    public void setSession_name(String session_name) {
+        this.session_name = session_name;
+    }
     
     public ArrayList<Status> getStatus() {
         return status;

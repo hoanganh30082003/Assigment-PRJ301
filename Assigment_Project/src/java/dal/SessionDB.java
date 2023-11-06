@@ -113,5 +113,29 @@ public class SessionDB extends DBcontext<Session> {
         }
 
     }
-}
 
+    public ArrayList<Session> getSession(String subject_id,String group_id) {
+        ArrayList<Session> sessions = new ArrayList<>();
+        String sql = "select session_id,session_name \n"
+                + "from Session\n"
+                + "where subject_id = ? and group_id = ?";
+        PreparedStatement stm;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, subject_id);
+            stm.setString(2, group_id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {                
+                Session session = new Session();
+                session.setSession_id(rs.getInt("session_id"));
+                session.setSession_name(rs.getString("session_name"));
+                sessions.add(session);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return sessions;
+    }
+}

@@ -23,7 +23,7 @@ public class StudentDB extends DBcontext<Student>{
         String sql ="select * from Student where group_id =?";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, group_id);;
+            stm.setString(1, group_id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {                
                 Student student = new Student();
