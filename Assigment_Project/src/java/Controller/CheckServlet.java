@@ -4,7 +4,6 @@
  */
 package Controller;
 
-import dal.GroupDB;
 import dal.SessionDB;
 import dal.StatusDB;
 import dal.StudentDB;
@@ -18,7 +17,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import model.Group;
 import model.Session;
 import model.Status;
 import model.Student;
@@ -77,8 +75,8 @@ public class CheckServlet extends HttpServlet {
         ArrayList<Session> sessions = sessionDB.getSession(sid, gid);
         ArrayList<Status> statuses = statusDB.getStatus(sid, gid);
 
-        Map<String, Integer> studentAbsencesMap = calculateStudentAbsences(statuses); 
-        Map<String, Double>  studentAttendancePercentageMap = calculateStudentAttendancePercentage(statuses);
+        Map<String, Integer> studentAbsencesMap = calculateStudentAbsences(statuses);
+        Map<String, Long> studentAttendancePercentageMap = calculateStudentAttendancePercentage(statuses, sessions);
         
         request.setAttribute("studentAttendancePercentageMap", studentAttendancePercentageMap);
         request.setAttribute("studentAbsencesMap", studentAbsencesMap);
@@ -92,8 +90,8 @@ public class CheckServlet extends HttpServlet {
         Map<String, Integer> studentAbsencesMap = new HashMap<>();
 
         for (Status status : statuses) {
-            String studentId = String.valueOf(status.getStudent().getStudent_id()); 
-            if (!status.isStatus()) { 
+            String studentId = String.valueOf(status.getStudent().getStudent_id());
+            if (!status.isStatus()) {
                 if (studentAbsencesMap.containsKey(studentId)) {
                     int currentAbsences = studentAbsencesMap.get(studentId);
                     studentAbsencesMap.put(studentId, currentAbsences + 1);
@@ -105,33 +103,37 @@ public class CheckServlet extends HttpServlet {
 
         return studentAbsencesMap;
     }
-    private Map<String, Double> calculateStudentAttendancePercentage( ArrayList<Status> statuses) {
-        Map<String, Double> studentAttendancePercentageMap = new HashMap<>();
-        Map<String, Integer> studentTotalAbsencesMap = new HashMap<>();
-        
-        for (Status status : statuses) {
-            String studentId = String.valueOf(status.getStudent().getStudent_id());
-            if (!status.isStatus()) { 
-                if (studentTotalAbsencesMap.containsKey(studentId)) {
-                    int currentAbsences = studentTotalAbsencesMap.get(studentId);
-                    studentTotalAbsencesMap.put(studentId, currentAbsences + 1);
-                } else {
-                    studentTotalAbsencesMap.put(studentId, 1);
-                }
+
+    private Map<String, Long> calculateStudentAttendancePercentage(ArrayList<Status> statuses, ArrayList<Session> sessions) {
+    Map<String, Long> studentAttendancePercentageMap = new HashMap<>();
+    Map<String, Integer> studentTotalAbsencesMap = new HashMap<>();
+
+    for (Status status : statuses) {
+        String studentId = String.valueOf(status.getStudent().getStudent_id());
+        if (!status.isStatus()) {
+            if (studentTotalAbsencesMap.containsKey(studentId)) {
+                int currentAbsences = studentTotalAbsencesMap.get(studentId);
+                studentTotalAbsencesMap.put(studentId, currentAbsences + 1);
+            } else {
+                studentTotalAbsencesMap.put(studentId, 1);
             }
         }
-        // Tính phần trăm buổi nghỉ của từng học sinh
-        for (Status status : statuses) {
-            String studentId = String.valueOf(status.getStudent().getStudent_id());
-            double totalAbsences = studentTotalAbsencesMap.get(studentId);
-            double totalSessions = statuses.size();
-
-            double attendancePercentage = ((totalSessions - totalAbsences) / totalSessions) * 100;
-            studentAttendancePercentageMap.put(studentId, attendancePercentage);
-        }
-
-        return studentAttendancePercentageMap;
     }
+    for (Status status : statuses) {
+        String studentId = String.valueOf(status.getStudent().getStudent_id());
+        double totalSessions = (double) sessions.size();
+        if (studentTotalAbsencesMap.get(studentId) != null) {
+            double totalAbsences = (double) studentTotalAbsencesMap.get(studentId);
+            double attendancePercentage = ((totalSessions - totalAbsences) / totalSessions) * 100;
+            long roundedPercentage = Math.round(attendancePercentage);
+            studentAttendancePercentageMap.put(studentId, roundedPercentage);
+        } else {
+            studentAttendancePercentageMap.put(studentId, 100L);
+        }
+    }
+    return studentAttendancePercentageMap;
+}
+
 
     /**
      * Handles the HTTP <code>POST</code> method.

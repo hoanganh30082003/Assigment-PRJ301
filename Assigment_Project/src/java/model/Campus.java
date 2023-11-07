@@ -9,13 +9,14 @@ package model;
  * @author FPTSHOP
  */
 public class Campus implements IBaseModel{
-    String campus_id, campus_name;
+    int campus_id;
+    String campus_name;
 
-    public String getCampus_id() {
+    public int getCampus_id() {
         return campus_id;
     }
 
-    public void setCampus_id(String campus_id) {
+    public void setCampus_id(int campus_id) {
         this.campus_id = campus_id;
     }
 

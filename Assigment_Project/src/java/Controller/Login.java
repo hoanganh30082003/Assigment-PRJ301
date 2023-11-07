@@ -14,7 +14,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import model.Account;
+import model.Campus;
 
 /**
  *
@@ -61,7 +63,11 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("login.jsp");
+        CampusDB cdb = new CampusDB();
+        ArrayList<Campus> campuses = cdb.getCampus();
+        HttpSession session = request.getSession();
+        session.setAttribute("campuses", campuses);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     /**
@@ -77,7 +83,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         String user = request.getParameter("username");
         String password = request.getParameter("password");
-        String campus_id = request.getParameter("campus");
+        int campus_id = Integer.parseInt(request.getParameter("campus"));
         Account param = new Account();
         param.setUsername(user);
         param.setPassword(password);
@@ -85,15 +91,19 @@ public class Login extends HttpServlet {
         param.setCampus(cdb.getById(campus_id));
         AccountDBContext db = new AccountDBContext();
         Account loggedAcc = db.get(param);
-
-        if (loggedAcc != null) {
+        
+        if (loggedAcc == null) {
+                String error = "Invalid username or password!";
+                request.setAttribute("error", error);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+        } else {
+            if (loggedAcc.getCampus().getCampus_id() != campus_id) {
+                request.setAttribute("error", "invalid campus!");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            }
             HttpSession session = request.getSession();
             session.setAttribute("acc", loggedAcc);
-            request.getRequestDispatcher("ttOfInstructor.jsp").forward(request, response);
-        } else {
-            String error = "Invalid username or password or campus!";
-            request.setAttribute("error", error);
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("schedule").forward(request, response);
 
         }
     }

@@ -1,81 +1,133 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Oct 8, 2023, 1:07:48 AM
-    Author     : FPTSHOP
-*/
-b{
-    color: white;
-    background: linear-gradient(to bottom, orange,#ff9933);
-    border-radius: 5px;
-    padding: 3px;
-}
-*{
-    margin: 10px;
-    font-family: sans-serif;
+body {
+    color: black; /* Màu văn bản đen hoặc màu văn bản bạn muốn */
+    font-family: Arial, sans-serif;
+    background-image: url("../Image/sanhAlpha.jpg");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
 }
 
-.btn{
-    background: linear-gradient(to bottom, white,#E8E3E3);
-    margin: unset;
-}
-.body{
+.header {
+    background: linear-gradient(to left, #7436E6, #05BDCD);
+    padding: 10px;
     display: flex;
-    text-align: center;
-
+    justify-content: space-between;
+    align-items: center;
 }
-.header{
-    background-color: #ff9933;
+
+h1 {
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+}
+
+.mid-title {
+    color: white;
+}
+
+.login-main {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 60vh; /* Optional: To center vertically within the viewport */
 }
-p{
+
+/* Style the main table */
+.main-table {
+    
+    width: 30%;
     text-align: center;
-    color: white;
+    background-color: rgba(240, 240, 240, 0.7); /* Sử dụng màu trong suốt với alpha 0.7 */
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 10px;
 }
+.main-table thead th {
+    text-align: center;
+    font-size: 25px;
+    padding: 10px;  
+    font-family: 'Arial', sans-serif;  
+
+}
+
+.main-table td {
+    padding: 10px;  
+}
+
+.main-table label {
+    font-size: 20px;
+}
+
+ 
+.main-table input[type="text"],
+.main-table input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.main-table select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.main-table select:focus {
+    outline: none;  
+    border-color: #007BFF;  
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);  
+}
+
+.main-table select option {
+    padding: 5px;
+    font-size: 15px;
+}
+
+.main-table .btn[type="submit"] {
+    background-color: #6C7B8B;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.main-table .btn[type="submit"]:hover {
+    background-color: #696969;
+}
+
+
+#error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
 footer {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #333; /* Màu nền của footer */
-    color: #fff; /* Màu chữ của footer */
-    padding: 10px; /* Khoảng cách bên trong footer */
-    text-align: center; /* Căn giữa nội dung của footer */
-}
-.mid-title{
+    background: linear-gradient(to left, #7436E6, #05BDCD);
+    padding: 10px;
     text-align: center;
-}
-.input{
-    width: 50%;
-    margin: auto;
-    border: 1px solid whitesmoke;
-    border-radius: 5px;
-}
-.login-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-}
-#title{
-    text-align: center;
-    font-size: 30px;
-}
-table{
-    width: 50%;
-    text-align: center;
-
-}
-#input{
-    width: 40%;
-    border-radius: 5px;
-}
-.inline{
-    display: flex;
-    justify-content: center;
 }
 
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer img {
+    width: 120px;
+    height: 40px;
+    border: 0;
+}

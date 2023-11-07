@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="Css/TtofLecturer.css"/>
 
     </head>
-    <body style="background-color: #414045">
+    <body>
         <div class="row header">
             <div class="col-md">
                 <h1>FPT University Academic Portal</h1>
@@ -37,44 +37,39 @@
                     </tbody></table>
             </div>
         </div>
-        <div class="row information">
-            <div class="col-md-12">
-
-                <b>View Schedule</b>
-
-                <label>Campus: ${sessionScope.acc.campus.campus_name}</label>
-                <label>Lecturer:${sessionScope.acc.instructor.instructor_name}</label>
-
-                <p>
-                    <b>Note</b>: These activities do not include extra-curriculum activities, such as
-                    club activities ...
-                </p>
-                <p>
-                    <b>Chú thích</b> : Các hoạt động trong bảng dưới không bao gồm hoạt động ngoại khóa,
-                    ví dụ như hoạt động câu lạc bộ ...
-                </p>
+        <div>
+            <div class="title">
                 <div>
-                    <p>
-                        Các phòng bắt đầu bằng AL thuộc tòa nhà Alpha. VD: AL...<br>
-                        Các phòng bắt đầu bằng BE thuộc tòa nhà Beta. VD: BE,..<br>
-                        Các phòng bắt đầu bằng G thuộc tòa nhà Gamma. VD: G201,...<br>
-                        Các phòng tập bằng đầu bằng R thuộc khu vực sân tập Vovinam.<br>
-                        Các phòng bắt đầu bằng DE thuộc tòa nhà Delta. VD: DE,..<br>
-                        Little UK (LUK) thuộc tầng 5 tòa nhà Delta
-                    </p>
+                    <b>View Schedule</b>
                 </div>
+                <div class="infor">
+                    <a href="logout">logout</a>
+                    <label>Campus: ${sessionScope.acc.campus.campus_name}</label>
+                    <label>Lecturer:${sessionScope.acc.instructor.instructor_name}</label>
+                </div>
+            </div>
+
+            <form  action="schedule"method="POST">
                 <center>
-
-                    <form  action="schedule"method="get">
-                        <label>From</label>
-                        <input type="date" class="btn" name="from" value="${requestScope.from}">
-                        <label>To</label>
-                        <input type="date"  class="btn"  name="to" value="${requestScope.to}">
-                        <input type="submit" value="View" class="btn">
-                    </form>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label>From</label>
+                                    <input type="date" class="btn" name="from" value="${requestScope.from}">
+                                </td>
+                                <td>
+                                    <label>To</label>
+                                    <input type="date"  class="btn"  name="to" value="${requestScope.to}">
+                                </td>
+                                <td><input type="submit" value="View" class="btn"></td>
+                            </tr>  
+                        </tbody>
+                    </table>
                 </center>
-
-                <table class="tt">
+            </form>
+            <div>
+                <table class="main-table">
                     <thead>
                         <tr>
                             <td></td>
@@ -92,16 +87,21 @@
                                         <c:set var="sessionFound" value="false" />
                                         <c:forEach items="${session}" var="s">
                                             <c:if test="${s.date eq d and s.slot.slot_id eq l.slot_id}">
-                                                <a href="attendance?id=${s.session_id}">
-                                                    ${s.subject.subject_id}-${s.group_id}<br>
-                                                    ${s.room_id}<br>(${s.slot.start_time}-${s.slot.end_time})
-                                                    <c:if test="${s.isAtt}">
-                                                        <p style="color: green">(attended)</p>
+                                                <details>
+                                                    <summary>
+                                                        <c:if test="${s.isAtt}">
+                                                        <p style="color: green">${s.subject.subject_id}</p>
                                                     </c:if>
-                                                    <c:if test="${!s.isAtt}">
-                                                        <p style="color: red">(not yet)</p>
+                                                        <c:if test="${!s.isAtt}">
+                                                        <p>${s.subject.subject_id}</p>
                                                     </c:if>
+                                                    </summary>
+                                                    <a href="attendance?id=${s.session_id}" class="no-underline">
+                                                    <br>${s.group_id}-${s.room_id}
+                                                    <br>(${s.slot.start_time}-${s.slot.end_time})
                                                 </a>
+                                                </details>
+                                                
                                                 <c:set var="sessionFound" value="true" />
                                             </c:if>
                                         </c:forEach>
@@ -114,53 +114,21 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                        <a href="report">see report</a>
-                <p>
-                    <br><b>More note / Chú thích thêm:</b>
-                </p>
-                <div>
-                    <ul>
-                        <li>
-                            (<font color="green">attended</font>): ${sessionScope.acc.instructor.instructor_name} đã tham gia hoạt động này</li>
-                        <li>
-                            (<font color="red">absent</font>): ${sessionScope.acc.instructor.instructor_name} đã vắng mặt buổi này</li> 
-                        <li>(-): no data was given / chưa có dữ liệu</li> 
-                    </ul>
-                </div>
-                <p>
-                </p>
-
-
-                <tr>
-                    <td>                                  
-                <tr>
-                    <td>                     
-                        <br>
-                        <b>Mọi góp ý, thắc mắc xin liên hệ:</b>
-                        <b>Phòng dịch vụ sinh viên</b><br>
-                        <table >
-                            <tbody>
-                                <tr>
-                                    <th> Email:</th>
-                                    <th><a href="mailto:dichvusinhvien@fe.edu.vn">dichvusinhvien@fe.edu.vn</a></th>
-                                </tr>                                           
-                                <tr>
-                                    <td> Điện thoại:</td>
-                                    <td><span>(024)7308.13.13 </span></td>
-                                </tr>                                                
-                            </tbody>
-                        </table>                                        
-                        <br>
             </div>
+            <div class="report">
+                <a href="report" class="btn btn-dark">See Report</a>
+            </div>
+
+            <footer>
+                <p>
+                    © Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>&nbsp;|&nbsp;
+                    <a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>&nbsp;|&nbsp; 
+                    <a href="http://library.fpt.edu.vn" target="_blank">library</a>&nbsp;|&nbsp; 
+                    <a href="http://library.books24x7.com" target="_blank">books24x7</a>
+                </p>
+            </footer>            
         </div>
 
-        <footer>
-            <p>
-                © Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>&nbsp;|&nbsp;
-                <a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>&nbsp;|&nbsp; 
-                <a href="http://library.fpt.edu.vn" target="_blank">library</a>&nbsp;|&nbsp; 
-                <a href="http://library.books24x7.com" target="_blank">books24x7</a>
-            </p>
-        </footer>
+
     </body>
 </html>

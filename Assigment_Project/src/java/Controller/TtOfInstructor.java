@@ -40,10 +40,9 @@ public class TtOfInstructor extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.text.ParseException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         Account loggedAcc = (Account) session.getAttribute("acc");
@@ -54,14 +53,17 @@ public class TtOfInstructor extends HttpServlet {
         if (from == null && to == null) {
             dates = (ArrayList<Date>) DateUtils.getDatesOfCurrentWeek();
         } else {
-            dates = (ArrayList<Date>) DateUtils.getSQLDatesBetween(from, to);
+           try {
+               dates = (ArrayList<Date>) DateUtils.getSQLDatesBetween(from, to);
+           } catch (ParseException ex) {
+               Logger.getLogger(TtOfInstructor.class.getName()).log(Level.SEVERE, null, ex);
+           }
         }
 
         Date fromDate = dates.get(0);
         Date toDate = dates.get(dates.size() - 1);
         SlotDB sl = new SlotDB();
         List<Slot> slots = sl.getSlot();
-
         SimpleDateFormat f = new SimpleDateFormat("dd/MM");
         ArrayList<String> dateFormat = new ArrayList<>();
         for (Date date : dates) {
@@ -80,6 +82,7 @@ public class TtOfInstructor extends HttpServlet {
             request.getRequestDispatcher("ttOfInstructor.jsp").forward(request, response);
         
 
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -94,11 +97,7 @@ public class TtOfInstructor extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(TtOfInstructor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -112,6 +111,7 @@ public class TtOfInstructor extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /**

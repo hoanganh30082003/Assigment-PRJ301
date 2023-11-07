@@ -1,0 +1,171 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Nov 7, 2023, 2:57:18 PM
+    Author     : FPTSHOP
+*/
+/* Định dạng toàn bộ trang */
+body {
+    background-color: #fff; /* Màu nền trắng */
+    color: black; /* Màu văn bản đen hoặc màu văn bản bạn muốn */
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+.page-container {
+    
+}
+
+/* Định dạng header */
+.header {
+    background: linear-gradient(to left, #7436E6, #05BDCD);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Định dạng tiêu đề */
+h1 {
+    margin: auto;
+    font-size: 35px;
+    text-align: center;
+}
+
+.mid-title {
+    margin: 0;
+    font-size: 16px;
+}
+.infor{
+    display: flex;
+    
+    
+}
+.tables-container {
+    display: inline-block;
+    justify-content: center; /* Canh giữa theo chiều ngang */ 
+}
+
+/* Định dạng cả hai bảng (subject và group) */
+
+.subject {
+    /* Định dạng bảng */
+    width: 100%; /* 100% chiều rộng */
+    
+}
+
+.subject td {
+    /* Định dạng mỗi ô trong bảng */
+    padding: 15px; /* Khoảng cách bên trong ô */
+}
+
+.subject a.nav-link {
+    /* Định dạng mỗi liên kết (link) a như một button */
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    padding: 8px 16px; /* Tạo khoảng cách xung quanh nút */
+    background-color: #05BDCD; /* Màu nền của nút */
+    border: none; /* Loại bỏ đường viền */
+    border-radius: 4px; /* Độ cong góc cho nút */
+    cursor: pointer; /* Biểu tượng con trỏ khi di chuột qua nút */
+    display: inline-block; /* Hiển thị liên kết như một khối trên cùng một hàng */
+    margin: 0 10px; /* Tạo khoảng cách giữa các mục */
+}
+
+.subject a.nav-link:hover {
+    /* Định dạng hover khi di chuột qua nút */
+    background-color: #7436E6; /* Màu nền thay đổi khi hover */
+    color: #fff; /* Màu văn bản thay đổi khi hover */
+}
+.group {
+    width: 100%; /* 100% chiều rộng */
+    border-collapse: collapse; /* Loại bỏ khoảng cách giữa các ô */
+    text-align: center;
+}
+
+.group td {
+    padding: 8px; /* Khoảng cách bên trong ô */
+}
+
+.group a.group-link {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    padding: 8px 16px; /* Tạo khoảng cách xung quanh nút */
+    background-color: #05BDCD; /* Màu nền của nút */
+    border: none; /* Loại bỏ đường viền */
+    border-radius: 4px; /* Độ cong góc cho nút */
+    cursor: pointer; /* Biểu tượng con trỏ khi di chuột qua nút */
+    display: inline-block; /* Hiển thị liên kết như một khối trên cùng một hàng */
+    margin: 0 10px; /* Tạo khoảng cách giữa các mục */
+}
+
+.group a.group-link:hover {
+    background-color: #7436E6; /* Màu nền thay đổi khi hover */
+    color: #fff; /* Màu văn bản thay đổi khi hover */
+}
+
+.tt {
+    width: 100%;
+    border-collapse: collapse;
+    margin : 10px;
+    max-height: 300px; /* Đặt chiều cao tối đa của bảng */
+    overflow-y: auto; /* Hiển thị thanh cuộn theo chiều dọc khi cần */
+}
+
+/* Định dạng các ô header */
+.tt th {
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Định dạng các ô dữ liệu */
+.tt td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Định dạng cột 'Total Absents' và 'Status' */
+.tt td:nth-last-child(2),
+.tt td:last-child {
+    text-align: center;
+}
+
+.attendance-cell {
+    text-align: center;
+    color: black;
+}
+
+
+
+
+
+
+/* Định dạng footer */
+footer {
+    margin-top: auto;
+    width: 100%;
+    background: linear-gradient(to left, #7436E6, #05BDCD); /* Hiệu ứng chuyển màu từ trái qua phải */
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+/* Định dạng liên kết (link) trong footer */
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* Định dạng hình ảnh logo */
+footer img {
+    width: 120px;
+    height: 40px;
+    border: 0;
+}
+

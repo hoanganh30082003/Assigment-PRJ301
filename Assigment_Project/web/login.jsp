@@ -17,8 +17,7 @@
         <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap.css"/>
         <link rel="stylesheet" href="Bootstrap/bootstrap-5.3.2-dist/css/bootstrap.min.css"/>
     </head>
-    <body style="background-color: #414045">
-        <form action="login" method="post">
+    <body>
             <div class="row header">
                 <div class="col-md">
                     <h1>FPT University Academic Portal</h1>
@@ -38,33 +37,34 @@
                         </tbody></table>
                 </div>
             </div>
+        <form action="login" method="post">
             <div class="login-main">
-                <table>
-                    <tr><td id="title"><b >Giảng viên</b></td></tr>
-                    <tr> 
-                        <td>
-                            <label style="color: white">Username:</label>
-                            <input type="text" name="username" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label style="color: white">Password:</label>
-                            <input type="password"  name="password" required>
-                        </td>
-                    </tr>
-                    <tr class="inline">
-                        <td ><select class="btn" name="campus">
+                <table class="main-table" >
+                    <thead>
+                        <tr>
+                            <th colspan="2">Giảng viên</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><label>Username:</label></td>
+                            <td><input type="text" name="username" required></td>
+                        </tr>
+                        <tr>
+                            <td><label>Password:</label></td>
+                            <td><input type="password"  name="password" required></td>
+                        </tr>
+                        <tr>
+                            <td ><select class="btn" name="campus">
                                 <option selected="selected">Select Campus</option>
-                                <option value="1">FU-Hà Nội</option>
-                                <option value="2">FU-Hồ Chí Minh</option>
-                                <option value="3">FU-Đà Nẵng</option>
-                                <option value="4">FU-Cần Thơ</option>
-                                <option value="5">FU-Quy Nhơn</option>
+                                <c:forEach items="${sessionScope.campuses}" var="ca">
+                                    <option value="${ca.campus_id}">FU-${ca.campus_name}</option>
+                                    </c:forEach>
                             </select></td>
                             <td><input class="btn" type="submit" value="Login"></td>
-                    </tr>
-                    <tr><td style="color: red">${requestScope.error}</td></tr>
+                        </tr>
+                        <tr><td id="error">${requestScope.error}</td></tr>
+                    </tbody>
                 </table>
             </div>
             <footer>

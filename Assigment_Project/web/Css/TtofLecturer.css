@@ -1,65 +1,182 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Oct 8, 2023, 6:59:35 PM
-    Author     : FPTSHOP
-*/
+body {
+    color: black; /* Màu văn bản đen hoặc màu văn bản bạn muốn */
+    font-family: Arial, sans-serif;
+    
+}
 
-.information{
+.header {
+    background: linear-gradient(to left, #7436E6, #05BDCD);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-size: 35px;
+    margin: 0;
+    text-align: center;
+}
+
+.mid-title {
     color: white;
 }
-b{
-    color: white;
-    background: linear-gradient(to bottom, orange,#ff9933);
-    border-radius: 5px;
-    padding: 3px
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px; /* Thêm margin cho toàn bộ .title */
+    padding: 10px; /* Thêm padding cho toàn bộ .title */
 }
-*{
+
+ .title b {
+    flex: 1;
+    margin: 10px; /* Đặt margin cho thẻ <b> */
+    padding: 10px; /* Đặt padding cho thẻ <b> */
+    background-color: #05BDCD;
+    border-radius: 10px;
+    color:white;
+}
+
+.title a, .title label {
+    flex: 0;
+    margin: 0; /* Đặt margin cho thẻ <a> và <label> */
+    padding: 0; /* Đặt padding cho thẻ <a> và <label> */
+    margin-left: 10px; /* Đặt khoảng cách ngang giữa các thẻ <a> và <label> */
+}
+html, body {
+    height: 100%;
+    margin: 0; /* Loại bỏ margin mặc định */
+    padding: 0; /* Loại bỏ padding mặc định */
+}
+.infor {
+    
+    width: 30%;
+    text-align: center;
+    background-color: rgba(240, 240, 240, 0.7); /* Sử dụng màu trong suốt với alpha 0.7 */
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin: 10px;
-    font-family: sans-serif;
 }
-.btn{
-    background: linear-gradient(to bottom, white,#E8E3E3);
-    margin: unset
+/* Định dạng phần biểu mẫu */
+center table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
 }
-.header{
-    background-color: #ff9933;
+
+center input[type="submit"] {
+    margin: 5px; /* Tạo khoảng cách giữa các phần tử */
+    background-color: #CFCFCF;
+}
+/* Định dạng các nhãn và input */
+center input[type="date"] {
+    margin: 5px; /* Tạo khoảng cách giữa các phần tử */
+    background-color: #FFE4C4;
+}
+input[type="date"]:hover,
+input[type="submit"]:hover {
+    background-color: #f0f0f0; /* Thay đổi màu nền */
+    color: #333; /* Thay đổi màu văn bản */
+    border: 1px solid #ccc; /* Thay đổi viền */
+}
+
+/* Định dạng các ô input khi tập trung (focus) */
+input[type="date"]:focus,
+input[type="submit"]:focus {
+    background-color: #fff; /* Thay đổi màu nền */
+    color: #000; /* Thay đổi màu văn bản */
+    border: 2px solid #007BFF; /* Thay đổi viền */
+    outline: none; /* Loại bỏ viền nét đứt mặc định */
+}
+/* Định dạng các ô input */
+center td {
+    padding: 5px; /* Tạo khoảng cách trong mỗi ô */
+}
+
+
+/* Style the main table */
+.main-table {
+    width: 100%;
+    text-align: center;
+    background-color: rgba(240, 240, 240, 0.7); /* Sử dụng màu trong suốt với alpha 0.7 */
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    
+}
+.main-table thead th {
+    text-align: center;
+    font-size: 25px;
+    padding: 10px;  
+    font-family: 'Arial', sans-serif;  
+    
+}
+
+.main-table td {
+    border: 1px solid #9C9C9C;
+}
+
+.main-table label {
+    font-size: 20px;
+}
+
+.report{
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+.btn-dark{
+    height: 100%;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+summary{
+    color: #000000; 
+}
+
+details summary {
+    display: inline; /* Đảm bảo summary nằm trên cùng một dòng với mũi tên */
+    cursor: pointer; /* Thêm kiểu con trỏ để cho biết có thể nhấn vào summary */
+}
+.no-underline {
+    text-decoration: none;
+}
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
 footer {
-    bottom: 0;
-    left: 0;
+    
     width: 100%;
-    color: #fff; /* Màu chữ của footer */
-    padding: 10px; /* Khoảng cách bên trong footer */
-    text-align: center; /* Căn giữa nội dung của footer */
-}
-.mid-title{
+    background: linear-gradient(to left, #7436E6, #05BDCD);
+    padding: 10px;
     text-align: center;
 }
-.tt{
-    text-align: center;
-    font-size: 15px;
+
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
 }
-.tt th {
-    border-bottom: 1px solid #fff;
-    border-right: 1px solid #fff;
-    padding: 2px;
-    text-transform: uppercase;
-    height: 23px;
-    background-color: #9999ff;
-    font-weight: normal;
-}
-.tt td {
-    border-bottom: 1px solid #333;
-    border: 1px solid #333;
-}
-.time-slot{
-    background-color: #5cb85c;
-    padding: 3px;
-    border-radius: 3px;
+
+footer img {
+    width: 120px;
+    height: 40px;
+    border: 0;
 }

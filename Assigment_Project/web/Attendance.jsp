@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="Css/Attendance.css"/>
         <title>Attendance</title>
     </head>
-    <body style="background-color: #414045">
+    <body>
         <div class="row header">
             <div class="col-md">
                 <h1>FPT University Academic Portal</h1>
@@ -36,16 +36,18 @@
                 </table>
             </div>
         </div>
-        <b>Single activity attendance</b>
-        <div class="col-md-12">
-            <form action="attendance" method="POST">
-                <table class="table">
+        <div class="title">
+            <b>Single activity attendance</b>
+        </div>
+        <form action="attendance" method="POST">
+            <div class="infor">
+
+                <table class="main-table">
                     <thead>
                         <tr>
                             <th>NO</th>
                             <th>CODE</th>
                             <th>NAME</th>
-                            <th>IMAGE</th>
                             <th>STATUS</th>
                             <th>COMMENT</th>
                         </tr>
@@ -55,31 +57,44 @@
                             <tr>
                         <input type="hidden" name="stuid" value="${s.student.student_id}" >
                         <td>${loop.index + 1}</td> 
-                        <td>St${s.student.student_id}</td>
+                        <td>${s.student.student_id}</td>
                         <td>${s.student.student_name}</td>
-                        <td><img src="src" alt="image"/></td>
                         <td>
-                            <input type="radio"  
+                            <table class="none">
+                                <tbody>
+                                    <tr>
+                                        <td ><input type="radio"  
                                    <c:if test="${!s.status}">
                                        checked="checked" 
                                    </c:if>
-                                   name="status${s.student.student_id}" value="absent" /> absent
-                            <input type="radio" 
+                                       name="status${s.student.student_id}" value="absent" /></td>
+                                        <td style="color: red">absent</td>
+                                        <td> <input type="radio" 
                                    <c:if test="${s.status}">
                                        checked="checked" 
                                    </c:if>
-                                   name="status${s.student.student_id}" value="present" /> present
+                                       name="status${s.student.student_id}" value="present" /></td>
+                                        <td style="color: green">present</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+
+                             
+                           
                         </td>
                         <td><input type="text" value="${s.comment}" name="comment${s.student.student_id}"></td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
+            </div>
+            <div>   
                 <input type="hidden" name="sesid" value="${requestScope.status[0].session.session_id}">
                 <input type="submit" class="btn" value="Save"/>
                 <span>${requestScope.alert}</span>
-            </form>
-        </div>
+            </div>
+        </form>
         <footer>
             <p>
                 © Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>&nbsp;|&nbsp;

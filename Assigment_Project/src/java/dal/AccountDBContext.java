@@ -25,18 +25,17 @@ public class AccountDBContext extends DBcontext<Account> {
                     + "from Account a\n"
                     + "inner join Instructor i on a.instructor_id = i.instructor_id\n"
                     + "inner join Campus c on a.campus_id = c.campus_id\n"
-                    + "where a.username = ? and a.password = ? and c.campus_id = ?";
+                    + "where a.username = ? and a.password = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, model.getUsername());
             stm.setString(2, model.getPassword());
-            stm.setString(3, model.getCampus().getCampus_id());
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 Account acc = new Account();
                 acc.setUsername(rs.getString("username"));
                 acc.setPassword(rs.getString("password"));
                 Campus c = new Campus();
-                c.setCampus_id(rs.getString("campus_id"));
+                c.setCampus_id(rs.getInt("campus_id"));
                 c.setCampus_name(rs.getString("campus_name"));
                 acc.setCampus(c);
                 Instructor i = new Instructor();

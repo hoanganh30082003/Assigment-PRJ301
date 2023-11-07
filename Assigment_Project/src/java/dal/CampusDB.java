@@ -17,16 +17,16 @@ import model.Campus;
  * @author FPTSHOP
  */
 public class CampusDB extends DBcontext<Campus> {
-    public Campus getById(String campus_id) {
+    public Campus getById(int campus_id) {
         String sql = "select * from Campus \n"
                 + "where campus_id = ?;";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, campus_id);
+            st.setInt(1, campus_id);
             ResultSet rs = st.executeQuery();
             while(rs.next()){
                 Campus c = new Campus();
-                c.setCampus_id(rs.getString("campus_id"));
+                c.setCampus_id(rs.getInt("campus_id"));
                 c.setCampus_name(rs.getString("campus_name"));
                 return c;
             }
@@ -35,5 +35,23 @@ public class CampusDB extends DBcontext<Campus> {
         }
         
         return null;
+    }
+    public ArrayList<Campus> getCampus() {
+        ArrayList<Campus> campuses = new ArrayList<>();
+        String sql = "select * from Campus";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                Campus c = new Campus();
+                c.setCampus_id(rs.getInt("campus_id"));
+                c.setCampus_name(rs.getString("campus_name"));
+                campuses.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CampusDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return campuses;
     }
 }
