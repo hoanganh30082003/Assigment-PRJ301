@@ -14,7 +14,7 @@ body {
     min-height: 100vh;
 }
 .page-container {
-    
+
 }
 
 /* Định dạng header */
@@ -38,12 +38,12 @@ h1 {
 }
 .infor{
     display: flex;
-    
-    
+
+
 }
 .tables-container {
     display: inline-block;
-    justify-content: center; /* Canh giữa theo chiều ngang */ 
+    justify-content: center; /* Canh giữa theo chiều ngang */
 }
 
 /* Định dạng cả hai bảng (subject và group) */
@@ -51,7 +51,7 @@ h1 {
 .subject {
     /* Định dạng bảng */
     width: 100%; /* 100% chiều rộng */
-    
+
 }
 
 .subject td {
@@ -65,7 +65,7 @@ h1 {
     color: black;
     font-size: 16px;
     padding: 8px 16px; /* Tạo khoảng cách xung quanh nút */
-    background-color: #05BDCD; /* Màu nền của nút */
+    background: linear-gradient(to right, #ede3a4, #f0d735);
     border: none; /* Loại bỏ đường viền */
     border-radius: 4px; /* Độ cong góc cho nút */
     cursor: pointer; /* Biểu tượng con trỏ khi di chuột qua nút */
@@ -93,7 +93,7 @@ h1 {
     color: black;
     font-size: 16px;
     padding: 8px 16px; /* Tạo khoảng cách xung quanh nút */
-    background-color: #05BDCD; /* Màu nền của nút */
+    background: linear-gradient(to right, #f0b099, #f55116);
     border: none; /* Loại bỏ đường viền */
     border-radius: 4px; /* Độ cong góc cho nút */
     cursor: pointer; /* Biểu tượng con trỏ khi di chuột qua nút */

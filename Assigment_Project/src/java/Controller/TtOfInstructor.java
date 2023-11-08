@@ -53,23 +53,25 @@ public class TtOfInstructor extends HttpServlet {
         if (from == null && to == null) {
             dates = (ArrayList<Date>) DateUtils.getDatesOfCurrentWeek();
         } else {
-           try {
-               dates = (ArrayList<Date>) DateUtils.getSQLDatesBetween(from, to);
-           } catch (ParseException ex) {
-               Logger.getLogger(TtOfInstructor.class.getName()).log(Level.SEVERE, null, ex);
-           }
+            try {
+                dates = (ArrayList<Date>) DateUtils.getSQLDatesBetween(from, to);
+            } catch (ParseException ex) {
+                Logger.getLogger(TtOfInstructor.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
-        Date fromDate = dates.get(0);
-        Date toDate = dates.get(dates.size() - 1);
-        SlotDB sl = new SlotDB();
-        List<Slot> slots = sl.getSlot();
-        SimpleDateFormat f = new SimpleDateFormat("dd/MM");
-        ArrayList<String> dateFormat = new ArrayList<>();
-        for (Date date : dates) {
-            String formattedDate = f.format(date);
-            dateFormat.add(formattedDate);
-        }
+        if (dates.isEmpty()) {
+            dates = (ArrayList<Date>) DateUtils.getDatesOfCurrentWeek();
+        } 
+            Date fromDate = dates.get(0);
+            Date toDate = dates.get(dates.size() - 1);
+            SlotDB sl = new SlotDB();
+            List<Slot> slots = sl.getSlot();
+            SimpleDateFormat f = new SimpleDateFormat("dd/MM");
+            ArrayList<String> dateFormat = new ArrayList<>();
+            for (Date date : dates) {
+                String formattedDate = f.format(date);
+                dateFormat.add(formattedDate);
+            }
             int id = loggedAcc.getInstructor().getInstructor_id();
             SessionDB tdb = new SessionDB();
             List<Session> list = tdb.getSession(id, fromDate, toDate);
@@ -80,9 +82,9 @@ public class TtOfInstructor extends HttpServlet {
             request.setAttribute("to", toDate);
             request.setAttribute("session", list);
             request.getRequestDispatcher("ttOfInstructor.jsp").forward(request, response);
-        
 
         
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -56,14 +56,14 @@
                         </tr>
                         <tr>
                             <td ><select class="btn" name="campus">
-                                <option selected="selected">Select Campus</option>
+                                    <option selected="selected" value="0">Select Campus</option>
                                 <c:forEach items="${sessionScope.campuses}" var="ca">
                                     <option value="${ca.campus_id}">FU-${ca.campus_name}</option>
                                     </c:forEach>
                             </select></td>
                             <td><input class="btn" type="submit" value="Login"></td>
                         </tr>
-                        <tr><td id="error">${requestScope.error}</td></tr>
+                        <tr><td id="error" colspan="2">${requestScope.error}</td></tr>
                     </tbody>
                 </table>
             </div>

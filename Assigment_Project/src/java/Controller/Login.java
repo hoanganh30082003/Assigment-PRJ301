@@ -84,6 +84,11 @@ public class Login extends HttpServlet {
         String user = request.getParameter("username");
         String password = request.getParameter("password");
         int campus_id = Integer.parseInt(request.getParameter("campus"));
+        if(campus_id == 0){
+         request.setAttribute("error", "Please select your campus!");
+         request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+        
         Account param = new Account();
         param.setUsername(user);
         param.setPassword(password);
@@ -91,6 +96,7 @@ public class Login extends HttpServlet {
         param.setCampus(cdb.getById(campus_id));
         AccountDBContext db = new AccountDBContext();
         Account loggedAcc = db.get(param);
+        
         
         if (loggedAcc == null) {
                 String error = "Invalid username or password!";
