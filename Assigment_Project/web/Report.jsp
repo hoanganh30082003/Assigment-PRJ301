@@ -28,7 +28,6 @@
                     }
                     if (attendanceValue < 80) {
                         $(this).css("background-color", "#FF0000");
-
                     }
                 });
             });
@@ -55,113 +54,122 @@
                     </tbody></table>
             </div>
         </div>
-        <div class="page-container">
-            <div class="infor">
-                <div class="tables-container">
-                    <table class="subject">
-                        <tbody>
-
-                            <tr>
-                                <c:forEach items="${sessionScope.subjects}" var="subject">
-                                    <td>
-                                        <a href="group?id=${subject.subject_id}" class="nav-link">
-                                            ${subject.subject_id}-${subject.subject_name}
-                                        </a>
-                                    </td>
-                                </c:forEach>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                    <table class="group">
-                        <tbody>
-                            <tr>
-                                <c:forEach items="${sessionScope.groups}" var="g">
-                                    <c:forEach items="${sessionScope.subjects}" var="subject">
-                                        <c:if test="${g.subject_id eq subject.subject_id}">
-
-                                            <td>
-                                                <a href="check?gid=${g.group_id}&sid=${subject.subject_id}" class="group-link">
-                                                    ${g.group_id}
-                                                </a>
-                                            </td>
-
-                                        </c:if>
-                                    </c:forEach>
-                                </c:forEach>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <div class="title">
+            <div>
+                <b>View Report</b>
             </div>
-            <c:if test="${ not empty requestScope.students}">
-                <table class="tt">
-                    <tbody>
+            <div class="infor">
+                <a href="logout">logout</a>
+                <label>Campus: ${sessionScope.acc.campus.campus_name}</label>
+                <label>Lecturer:${sessionScope.acc.instructor.instructor_name}</label>
+            </div>
+        </div>
+            <div class="page-container">
+                    <div class="tables-container">
+                        <table class="subject">
+                            <tbody>
 
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                                <c:forEach items="${requestScope.sessions}" var="ss">
-                                <th>${ss.session_name}</th>
-                                </c:forEach>
-                            <th>Total Absents</th>
-                            <th>Status</th>
-                        </tr>
-                        <c:forEach items="${requestScope.students}" var="st">
-                            <tr>
-                                <td>${st.student_id}</td>
-                                <td>${st.student_name}</td>
-                                <c:forEach items="${requestScope.sessions}" var="ss">
-                                    <c:set var="statusFound" value="false" />
-                                    <td>
-                                        <c:forEach items="${requestScope.statuses}" var="s">
-                                            <c:if test="${ss.session_id eq s.session.session_id and s.student.student_id eq st.student_id}">
-                                                <c:if test="${s.status}">
-                                                    <p style="color: green">P</p>
-                                                </c:if>
-                                                <c:if test="${!s.status}">
-                                                    <p style="color: red">A</p>
-                                                </c:if>
-                                                <c:set var="statusFound" value="true" />
+                                <tr>
+                                    <c:forEach items="${sessionScope.subjects}" var="subject">
+                                        <td>
+                                            <a href="group?id=${subject.subject_id}" class="nav-link">
+                                                ${subject.subject_id}-${subject.subject_name}
+                                            </a>
+                                        </td>
+                                    </c:forEach>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <table class="group">
+                            <tbody>
+                                <tr>
+                                    <c:forEach items="${sessionScope.groups}" var="g">
+                                        <c:forEach items="${sessionScope.subjects}" var="subject">
+                                            <c:if test="${g.subject_id eq subject.subject_id}">
+
+                                                <td>
+                                                    <a href="check?gid=${g.group_id}&sid=${subject.subject_id}" class="group-link">
+                                                        ${g.group_id}
+                                                    </a>
+                                                </td>
+
                                             </c:if>
                                         </c:forEach>
-                                        <c:if test="${not statusFound}">
-                                            -
+                                    </c:forEach>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <c:if test="${ not empty requestScope.students}">
+                    <div class="group-infor">${requestScope.subject_id} - ${requestScope.group_id}</div>
+                    <table class="tt">
+                        <tbody>
+
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                    <c:forEach items="${requestScope.sessions}" var="ss">
+                                    <th>${ss.session_name}</th>
+                                    </c:forEach>
+                                <th>Total Absents</th>
+                                <th>Status</th>
+                            </tr>
+                            <c:forEach items="${requestScope.students}" var="st">
+                                <tr>
+                                    <td>${st.student_id}</td>
+                                    <td>${st.student_name}</td>
+                                    <c:forEach items="${requestScope.sessions}" var="ss">
+                                        <c:set var="statusFound" value="false" />
+                                        <td>
+                                            <c:forEach items="${requestScope.statuses}" var="s">
+                                                <c:if test="${ss.session_id eq s.session.session_id and s.student.student_id eq st.student_id}">
+                                                    <c:if test="${s.status}">
+                                                        <p style="color: green">P</p>
+                                                    </c:if>
+                                                    <c:if test="${!s.status}">
+                                                        <p style="color: red">A</p>
+                                                    </c:if>
+                                                    <c:set var="statusFound" value="true" />
+                                                </c:if>
+                                            </c:forEach>
+                                            <c:if test="${not statusFound}">
+                                                -
+                                            </c:if>
+                                        </td>
+                                    </c:forEach>
+                                    <c:set var="absentFound" value="false" />
+                                    <td>
+                                        <c:forEach var="entry" items="${requestScope.studentAbsencesMap}">
+                                            <c:if test="${entry.key eq st.student_id}">
+                                                <span>${entry.value}</span>
+                                                <c:set var="absentFound" value="true" />
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${not absentFound}">
+                                            0
                                         </c:if>
                                     </td>
-                                </c:forEach>
-                                <c:set var="absentFound" value="false" />
-                                <td>
-                                    <c:forEach var="entry" items="${requestScope.studentAbsencesMap}">
-                                        <c:if test="${entry.key eq st.student_id}">
-                                            <span>${entry.value}</span>
-                                            <c:set var="absentFound" value="true" />
-                                        </c:if>
-                                    </c:forEach>
-                                    <c:if test="${not absentFound}">
-                                        0
-                                    </c:if>
-                                </td>
-                                <td >
-                                    <c:forEach var="entry" items="${requestScope.studentAttendancePercentageMap}">
-                                        <c:if test="${entry.key eq st.student_id}">
-                                            <span class="btn attendance-cell">${entry.value}%</span>
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </c:if>
-        </div>
-        <footer>
-            <p>
-                © Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>&nbsp;|&nbsp;
-                <a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>&nbsp;|&nbsp; 
-                <a href="http://library.fpt.edu.vn" target="_blank">library</a>&nbsp;|&nbsp; 
-                <a href="http://library.books24x7.com" target="_blank">books24x7</a>
-            </p>
-        </footer>
+                                    <td >
+                                        <c:forEach var="entry" items="${requestScope.studentAttendancePercentageMap}">
+                                            <c:if test="${entry.key eq st.student_id}">
+                                                <span class="btn attendance-cell">${entry.value}%</span>
+                                            </c:if>
+                                        </c:forEach>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </c:if>
+            <footer>
+                <p>
+                    © Powered by <a href="http://fpt.edu.vn" target="_blank">FPT University</a>&nbsp;|&nbsp;
+                    <a href="http://cms.fpt.edu.vn/" target="_blank">CMS</a>&nbsp;|&nbsp; 
+                    <a href="http://library.fpt.edu.vn" target="_blank">library</a>&nbsp;|&nbsp; 
+                    <a href="http://library.books24x7.com" target="_blank">books24x7</a>
+                </p>
+            </footer>
     </body>
 </html>

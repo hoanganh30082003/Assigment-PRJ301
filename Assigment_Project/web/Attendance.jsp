@@ -37,7 +37,14 @@
             </div>
         </div>
         <div class="title">
-            <b>Single activity attendance</b>
+            <div>
+                <b>View Attendance</b>
+            </div>
+            <div class="infor1">
+                <a href="logout">logout</a>
+                <label>Campus: ${sessionScope.acc.campus.campus_name}</label>
+                <label>Lecturer:${sessionScope.acc.instructor.instructor_name}</label>
+            </div>
         </div>
         <form action="attendance" method="POST">
             <div class="infor">
@@ -64,24 +71,24 @@
                                 <tbody>
                                     <tr>
                                         <td ><input type="radio"  
-                                   <c:if test="${!s.status}">
-                                       checked="checked" 
-                                   </c:if>
-                                       name="status${s.student.student_id}" value="absent" /></td>
+                                                    <c:if test="${!s.status}">
+                                                        checked="checked" 
+                                                    </c:if>
+                                                    name="status${s.student.student_id}" value="absent" /></td>
                                         <td style="color: red">absent</td>
                                         <td> <input type="radio" 
-                                   <c:if test="${s.status}">
-                                       checked="checked" 
-                                   </c:if>
-                                       name="status${s.student.student_id}" value="present" /></td>
+                                                    <c:if test="${s.status}">
+                                                        checked="checked" 
+                                                    </c:if>
+                                                    name="status${s.student.student_id}" value="present" /></td>
                                         <td style="color: green">present</td>
                                     </tr>
-                                    
+
                                 </tbody>
                             </table>
 
-                             
-                           
+
+
                         </td>
                         <td><input type="text" value="${s.comment}" name="comment${s.student.student_id}"></td>
                         </tr>

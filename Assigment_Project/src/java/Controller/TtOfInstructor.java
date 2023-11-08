@@ -16,6 +16,8 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -61,29 +63,33 @@ public class TtOfInstructor extends HttpServlet {
         }
         if (dates.isEmpty()) {
             dates = (ArrayList<Date>) DateUtils.getDatesOfCurrentWeek();
-        } 
-            Date fromDate = dates.get(0);
-            Date toDate = dates.get(dates.size() - 1);
-            SlotDB sl = new SlotDB();
-            List<Slot> slots = sl.getSlot();
-            SimpleDateFormat f = new SimpleDateFormat("dd/MM");
-            ArrayList<String> dateFormat = new ArrayList<>();
-            for (Date date : dates) {
-                String formattedDate = f.format(date);
-                dateFormat.add(formattedDate);
-            }
-            int id = loggedAcc.getInstructor().getInstructor_id();
-            SessionDB tdb = new SessionDB();
-            List<Session> list = tdb.getSession(id, fromDate, toDate);
-            request.setAttribute("slots", slots);
-            request.setAttribute("dates", dates);
-            request.setAttribute("dateFormat", dateFormat);
-            request.setAttribute("from", fromDate);
-            request.setAttribute("to", toDate);
-            request.setAttribute("session", list);
-            request.getRequestDispatcher("ttOfInstructor.jsp").forward(request, response);
+        }
+        Date fromDate = dates.get(0);
+        Date toDate = dates.get(dates.size() - 1);
+        SlotDB sl = new SlotDB();
+        List<Slot> slots = sl.getSlot();
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM");
+        ArrayList<String> dateFormat = new ArrayList<>();
+        for (Date date : dates) {
+            String formattedDate = f.format(date);
+            dateFormat.add(formattedDate);
+        }
+        int id = loggedAcc.getInstructor().getInstructor_id();
+        SessionDB tdb = new SessionDB();
+        List<Session> list = tdb.getSession(id, fromDate, toDate);
 
+        LocalDateTime currentTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedTime = currentTime.format(formatter);
         
+        request.setAttribute("currentDay", formattedTime);
+        request.setAttribute("slots", slots);
+        request.setAttribute("dates", dates);
+        request.setAttribute("dateFormat", dateFormat);
+        request.setAttribute("from", fromDate);
+        request.setAttribute("to", toDate);
+        request.setAttribute("session", list);
+        request.getRequestDispatcher("ttOfInstructor.jsp").forward(request, response);
 
     }
 

@@ -74,10 +74,12 @@ public class CheckServlet extends HttpServlet {
         ArrayList<Student> students = StudentDB.getStudentByGroupId(gid);
         ArrayList<Session> sessions = sessionDB.getSession(sid, gid);
         ArrayList<Status> statuses = statusDB.getStatus(sid, gid);
-
+        
         Map<String, Integer> studentAbsencesMap = calculateStudentAbsences(statuses);
         Map<String, Long> studentAttendancePercentageMap = calculateStudentAttendancePercentage(statuses, sessions);
         
+        request.setAttribute("subject_id", sid);
+        request.setAttribute("group_id", gid);
         request.setAttribute("studentAttendancePercentageMap", studentAttendancePercentageMap);
         request.setAttribute("studentAbsencesMap", studentAbsencesMap);
         request.setAttribute("statuses", statuses);

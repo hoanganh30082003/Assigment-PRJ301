@@ -22,11 +22,15 @@ h1 {
     color: white;
 }
 .title {
-    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 10px; /* Thêm margin cho toàn bộ .title */
     padding: 10px; /* Thêm padding cho toàn bộ .title */
 }
-.title b {
+
+ .title b {
+    flex: 1;
     margin: 10px; /* Đặt margin cho thẻ <b> */
     padding: 10px; /* Đặt padding cho thẻ <b> */
     background-color: #05BDCD;
@@ -34,11 +38,20 @@ h1 {
     color:white;
 }
 
-.infor {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.title a, .title label {
+    flex: 0;
+    margin: 0; /* Đặt margin cho thẻ <a> và <label> */
+    padding: 0; /* Đặt padding cho thẻ <a> và <label> */
+    margin-left: 10px; /* Đặt khoảng cách ngang giữa các thẻ <a> và <label> */
+}
+.infor1 {
+    
+    width: 30%;
+    text-align: center;
+    background-color: rgba(240, 240, 240, 0.7); /* Sử dụng màu trong suốt với alpha 0.7 */
     padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 10px;
 }
 .main-table {
     width: 100%;

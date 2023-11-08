@@ -12,6 +12,10 @@ body {
     align-items: center;
 }
 
+.isAtt{
+    color: #2d9627;
+    font-weight: bold; 
+}
 h1 {
     font-size: 35px;
     margin: 0;
@@ -101,9 +105,8 @@ center td {
     width: 100%;
     text-align: center;
     background-color: rgba(240, 240, 240, 0.7); /* Sử dụng màu trong suốt với alpha 0.7 */
-    padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    margin: 10px;
+    margin: 15px auto;
     
 }
 .main-table thead th {

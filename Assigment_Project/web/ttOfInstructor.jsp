@@ -83,25 +83,46 @@
                             <tr>
                                 <td>Slot ${l.slot_id}</td>
                                 <c:forEach items="${dates}" var="d">
+
                                     <td>
                                         <c:set var="sessionFound" value="false" />
                                         <c:forEach items="${session}" var="s">
                                             <c:if test="${s.date eq d and s.slot.slot_id eq l.slot_id}">
-                                                <details>
-                                                    <summary>
-                                                        <c:if test="${s.isAtt}">
-                                                        <p style="color: green">${s.subject.subject_id}</p>
-                                                    </c:if>
+                                                <c:set value="${requestScope.currentDay}" var="cur"/>
+
+                                                <c:choose>
+                                                    <c:when test="${s.date eq cur}">
+                                                        <a href="attendance?id=${s.session_id}" class="no-underline">
+                                                            ${s.subject.subject_id}
+                                                            <br>${s.group_id}-${s.room_id}
+                                                            <br>(${s.slot.start_time}-${s.slot.end_time})
+                                                            <c:if test="${s.isAtt}">
+                                                                <p style="color: green">(attend)</p>
+                                                            </c:if>
+
+                                                        </a>
                                                         <c:if test="${!s.isAtt}">
-                                                        <p>${s.subject.subject_id}</p>
-                                                    </c:if>
-                                                    </summary>
-                                                    <a href="attendance?id=${s.session_id}" class="no-underline">
-                                                    <br>${s.group_id}-${s.room_id}
-                                                    <br>(${s.slot.start_time}-${s.slot.end_time})
-                                                </a>
-                                                </details>
-                                                
+                                                            <p>(not yet)</p>
+                                                        </c:if>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <details>
+                                                            <summary>
+                                                                <c:if test="${s.isAtt}">
+                                                                    <p class="isAtt">${s.subject.subject_id}</p>
+                                                                </c:if>
+                                                                <c:if test="${!s.isAtt}">
+                                                                    <p>${s.subject.subject_id}</p>
+                                                                </c:if>
+                                                            </summary>
+                                                            <a href="attendance?id=${s.session_id}" class="no-underline">
+                                                                <br>${s.group_id}-${s.room_id}
+                                                                <br>(${s.slot.start_time}-${s.slot.end_time})
+                                                            </a>
+                                                        </details>
+                                                    </c:otherwise>
+                                                </c:choose>
+
                                                 <c:set var="sessionFound" value="true" />
                                             </c:if>
                                         </c:forEach>
