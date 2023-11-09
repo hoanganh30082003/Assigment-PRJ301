@@ -43,7 +43,7 @@
             <div class="infor1">
                 <a href="logout">logout</a>
                 <label>Campus: ${sessionScope.acc.campus.campus_name}</label>
-                <label>Lecturer:${sessionScope.acc.instructor.instructor_name}</label>
+                <label>Lecturer: ${sessionScope.acc.instructor.instructor_name}</label>
             </div>
         </div>
         <form action="attendance" method="POST">
